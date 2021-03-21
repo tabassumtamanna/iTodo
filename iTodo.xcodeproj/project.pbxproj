@@ -14,6 +14,7 @@
 		E9A8DD7325F9C89600B1A2ED /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E9A8DD7125F9C89600B1A2ED /* LaunchScreen.storyboard */; };
 		E9A8DD7F25F9CEA100B1A2ED /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E9A8DD7D25F9CEA100B1A2ED /* Model.xcdatamodeld */; };
 		E9F7961A25F9D75000955DE8 /* TodoListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F7961925F9D75000955DE8 /* TodoListViewController.swift */; };
+		E9F796202606FD3100955DE8 /* TaskListViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F7961F2606FD3100955DE8 /* TaskListViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		E9A8DD7425F9C89600B1A2ED /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = iTodo/Resources/Info.plist; sourceTree = SOURCE_ROOT; };
 		E9A8DD7E25F9CEA100B1A2ED /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		E9F7961925F9D75000955DE8 /* TodoListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoListViewController.swift; sourceTree = "<group>"; };
+		E9F7961F2606FD3100955DE8 /* TaskListViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,6 +89,7 @@
 			isa = PBXGroup;
 			children = (
 				E9F7961925F9D75000955DE8 /* TodoListViewController.swift */,
+				E9F7961F2606FD3100955DE8 /* TaskListViewCell.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -188,6 +191,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E9F796202606FD3100955DE8 /* TaskListViewCell.swift in Sources */,
 				E9F7961A25F9D75000955DE8 /* TodoListViewController.swift in Sources */,
 				E9A8DD6725F9C89500B1A2ED /* AppDelegate.swift in Sources */,
 				E9A8DD6925F9C89500B1A2ED /* SceneDelegate.swift in Sources */,

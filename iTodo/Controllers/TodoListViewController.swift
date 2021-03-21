@@ -79,13 +79,30 @@ extension TodoListViewController : UITableViewDataSource, UITableViewDelegate {
     // MARK: - Cell For Row At
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "taskListViewCell")!
+        let cell = tableView.dequeueReusableCell(withIdentifier: "TaskListViewCell", for: indexPath) as! TaskListViewCell
        
         let task = taskList[(indexPath as NSIndexPath).row]
         
-        cell.textLabel?.text = task
+        cell.taskLabel.text = task
+        cell.checkboxImage.image = UIImage(named: "unchecked")
         
         return cell
+    }
+    
+    // MARK: - Did Select Row At
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+        guard let cell = tableView.cellForRow(at: indexPath) as? TaskListViewCell else { return }
+        
+        if cell.checkboxImage.image == UIImage(named: "checked"){
+            cell.checkboxImage.image = UIImage(named: "unchecked")
+            cell.taskLabel.textColor = .black
+        } else {
+        
+            cell.checkboxImage.image = UIImage(named: "checked")
+            cell.taskLabel.textColor = .gray
+        }
     }
     
 }
