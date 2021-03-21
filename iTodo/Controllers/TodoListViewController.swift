@@ -8,14 +8,17 @@
 import UIKit
 import CoreData
 
+
 class TodoListViewController: UIViewController, UITextFieldDelegate {
 
+    // MARK:- IBOutlets
     @IBOutlet weak var taskTitle: UITextField!
     @IBOutlet weak var addTaskButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
    
     var taskList : [String] = []
     
+    // MARK:-  View Did Load
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -26,10 +29,12 @@ class TodoListViewController: UIViewController, UITextFieldDelegate {
         self.taskTitle.text = ""
     }
     
+    // MARK:-  Add Task Tapped
     @IBAction func addTaskTapped(_ sender: Any) {
         addTask()
     }
     
+    // MARK:-  Add Task
     func addTask() {
         if self.taskTitle.text == "" {
             print("Please enter a task")
@@ -40,6 +45,7 @@ class TodoListViewController: UIViewController, UITextFieldDelegate {
         self.taskTitle.text = ""
     }
     
+    // MARK:- Disable Add Task Button
     func disableAddTaskButton(_ isEnable : Bool) {
         self.addTaskButton.isEnabled = !isEnable
     }
@@ -51,19 +57,26 @@ class TodoListViewController: UIViewController, UITextFieldDelegate {
         return true
     }
     
+    // MARK: - Text Field Did End Editing
     func textFieldDidEndEditing(_ textField: UITextField) {
         addTask()
+        
+        self.taskTitle.becomeFirstResponder()
     }
+    
+    
 }
 
+// MARK: -  Extension TodoListViewController
 extension TodoListViewController : UITableViewDataSource, UITableViewDelegate {
     
-    
+    // MARK: - Number Of Rows In Section
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         return taskList.count
     }
     
+    // MARK: - Cell For Row At
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "taskListViewCell")!
