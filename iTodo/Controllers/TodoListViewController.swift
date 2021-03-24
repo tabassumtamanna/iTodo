@@ -100,10 +100,11 @@ class TodoListViewController: UIViewController, UITextFieldDelegate, NSFetchedRe
     // MARK:- Update Task Status
     func updateTaskStatus(at indexPath: IndexPath, status: Bool){
         
-        let taskToUpdateStatus = fetchResultsController.object(at: indexPath)
+        let taskToUpdate = fetchResultsController.object(at: indexPath)
         
-        taskToUpdateStatus.status = status
-        print(status)
+        taskToUpdate.status = status
+        taskToUpdate.completedDate = Date()
+        
         do {
             try dataController.viewContext.save()
         } catch {
