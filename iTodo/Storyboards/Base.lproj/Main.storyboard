@@ -12,6 +12,8 @@
         <scene sceneID="gii-3Q-lKL">
             <objects>
                 <navigationController id="hcj-rW-4YX" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="PHV-7e-yhg"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="HO8-6o-Rlb">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -22,7 +24,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zQO-Jg-FYu" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-961" y="108"/>
+            <point key="canvasLocation" x="-1149" y="-64"/>
         </scene>
         <!--ToDo-->
         <scene sceneID="tne-QT-ifu">
@@ -33,19 +35,19 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="0hP-X1-vMh">
-                                <rect key="frame" x="20" y="165" width="384" height="40"/>
+                                <rect key="frame" x="20" y="118" width="384" height="60"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter the task" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="LHz-ak-ONL">
-                                        <rect key="frame" x="0.0" y="0.0" width="300" height="40"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="300" height="60"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="300" id="7ep-Pw-rrg"/>
-                                            <constraint firstAttribute="height" constant="40" id="iu7-vt-h8t"/>
+                                            <constraint firstAttribute="height" constant="60" id="iu7-vt-h8t"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MbJ-rU-bRd">
-                                        <rect key="frame" x="310" y="0.0" width="74" height="40"/>
+                                        <rect key="frame" x="310" y="0.0" width="74" height="60"/>
                                         <color key="backgroundColor" systemColor="linkColor"/>
                                         <state key="normal" title="Add">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -57,7 +59,7 @@
                                 </subviews>
                             </stackView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Tcz-OW-hrP">
-                                <rect key="frame" x="20" y="232" width="374" height="600"/>
+                                <rect key="frame" x="20" y="205" width="374" height="558"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="TaskListViewCell" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="TaskListViewCell" rowHeight="81" id="1gQ-Dj-Z4p" customClass="TaskListViewCell" customModule="iTodo" customModuleProvider="target">
@@ -96,8 +98,8 @@
                         <constraints>
                             <constraint firstItem="Tcz-OW-hrP" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="Fi7-M7-n22"/>
                             <constraint firstItem="Tcz-OW-hrP" firstAttribute="top" secondItem="0hP-X1-vMh" secondAttribute="bottom" constant="27" id="Fzg-f1-lu9"/>
-                            <constraint firstItem="0hP-X1-vMh" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="77" id="OaT-ja-YU8"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Tcz-OW-hrP" secondAttribute="bottom" constant="30" id="Oan-wf-zeU"/>
+                            <constraint firstItem="0hP-X1-vMh" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="30" id="OaT-ja-YU8"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Tcz-OW-hrP" secondAttribute="bottom" constant="50" id="Oan-wf-zeU"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="0hP-X1-vMh" secondAttribute="trailing" constant="10" id="VB5-Dh-wNb"/>
                             <constraint firstItem="0hP-X1-vMh" firstAttribute="leading" secondItem="Tcz-OW-hrP" secondAttribute="leading" id="dqd-cg-dgx"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Tcz-OW-hrP" secondAttribute="trailing" constant="20" id="okF-LD-TqO"/>
@@ -112,7 +114,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-175" y="108"/>
+            <point key="canvasLocation" x="-465" y="-64"/>
         </scene>
     </scenes>
     <resources>

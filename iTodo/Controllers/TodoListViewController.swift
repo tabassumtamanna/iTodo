@@ -61,23 +61,26 @@ class TodoListViewController: UIViewController, UITextFieldDelegate, NSFetchedRe
     func addTask() {
         if self.taskTitle.text == "" {
             print("Please enter a task")
+            showFailureMessage(title: "Task Field Empty!", message: "Please enter a task.")
+
+        } else {
+            let taskTitle = self.taskTitle.text
+            
+            let task = Task(context: dataController.viewContext)
+            task.taskTitle = taskTitle
+            task.taskDescription = taskTitle
+            task.status = false
+            task.createdDate = Date()
+            
+            do {
+                try dataController.viewContext.save()
+            } catch {
+                print(error.localizedDescription)
+            }
+            setupFetchResultsController()
+            self.tableView.reloadData()
+            self.taskTitle.text = ""
         }
-        let taskTitle = self.taskTitle.text
-        
-        let task = Task(context: dataController.viewContext)
-        task.taskTitle = taskTitle
-        task.taskDescription = taskTitle
-        task.status = false
-        task.createdDate = Date()
-        
-        do {
-            try dataController.viewContext.save()
-        } catch {
-            print(error.localizedDescription)
-        }
-        setupFetchResultsController()
-        self.tableView.reloadData()
-        self.taskTitle.text = ""
     }
     
     // MARK:- Delete Task
@@ -131,6 +134,12 @@ class TodoListViewController: UIViewController, UITextFieldDelegate, NSFetchedRe
         self.taskTitle.becomeFirstResponder()
     }
     
+    // MARK: -  Show Failure Message
+    func showFailureMessage(title: String, message: String) {
+        let alertVC = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alertVC.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        present(alertVC, animated: true, completion: nil)
+    }
     
 }
 
