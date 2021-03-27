@@ -28,6 +28,7 @@ class TodoListViewController: UIViewController, UITextFieldDelegate, NSFetchedRe
         //disableAddTaskButton(true)
         
         self.tableView.delegate = self
+        self.tableView.dataSource = self
         self.taskTitle.delegate = self
         self.taskTitle.text = ""
         
@@ -42,12 +43,23 @@ class TodoListViewController: UIViewController, UITextFieldDelegate, NSFetchedRe
     // MARK: - Setup Fetch Results Controller
     fileprivate func setupFetchResultsController(){
         
+        
         let fetchRequest: NSFetchRequest<Task> = Task.fetchRequest()
-        fetchRequest.sortDescriptors = []
+        let sortDescriptor = NSSortDescriptor(key: "createdDate", ascending: false)
+        fetchRequest.sortDescriptors = [sortDescriptor]
+        
+        let today = NSDate()
+        let yesterday = Calendar.current.date(byAdding: .day, value: -1, to: NSDate() as Date)
+        print("today: \(today)")
+        print("yesterday: \(String(describing: yesterday))")
+       
+        let datePredicate = NSPredicate(format: "createdDate < %@ and createdDate > %@ ", today as NSDate, yesterday! as NSDate)
+        fetchRequest.predicate = datePredicate
         
         fetchResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: dataController.viewContext, sectionNameKeyPath: nil, cacheName: nil)
         
         fetchResultsController.delegate = self
+        
         do {
             try fetchResultsController.performFetch()
         } catch {

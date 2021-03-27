@@ -19,12 +19,22 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         appDelegate.dataController.load()
-        let navigationController = window?.rootViewController as! UINavigationController
+        
+        let navigationController = window?.rootViewController?.children[0] as! UINavigationController
         
         
         let todoListViewController = navigationController.topViewController as! TodoListViewController
         
         todoListViewController.dataController = appDelegate.dataController
+        
+       
+        let navigationController1 = window?.rootViewController?.children[1] as! UINavigationController
+        
+        
+        let todoArchiveViewController = navigationController1.topViewController as! TodoArchiveViewController
+        
+        todoArchiveViewController.dataController = appDelegate.dataController
+        
     }
 }
 
