@@ -136,12 +136,12 @@
             </objects>
             <point key="canvasLocation" x="-465" y="-64"/>
         </scene>
-        <!--Archive-->
+        <!--Archive List-->
         <scene sceneID="QP3-H4-goh">
             <objects>
                 <navigationController id="I57-zN-qaX" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Archive" image="list.bullet.rectangle" catalog="system" id="y21-un-uYj"/>
-                    <navigationItem key="navigationItem" id="Weg-OI-wqs"/>
+                    <navigationItem key="navigationItem" title="Archive List" id="Weg-OI-wqs"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Yh1-32-sFq">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -155,7 +155,7 @@
             </objects>
             <point key="canvasLocation" x="-1203" y="664"/>
         </scene>
-        <!--Todo Archive View Controller-->
+        <!--Archive List-->
         <scene sceneID="lbT-bo-Nm8">
             <objects>
                 <viewController id="Idd-se-wvs" customClass="TodoArchiveViewController" customModule="iTodo" customModuleProvider="target" sceneMemberID="viewController">
@@ -208,7 +208,7 @@
                             <constraint firstItem="hEm-Sj-1Kh" firstAttribute="top" secondItem="Kt1-yQ-FJb" secondAttribute="top" constant="10" id="uTE-Mk-gWL"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="fs9-qW-1Rd"/>
+                    <navigationItem key="navigationItem" title="Archive List" id="fs9-qW-1Rd"/>
                     <connections>
                         <outlet property="archiveTableView" destination="pbM-nZ-wZx" id="RrS-jA-xg1"/>
                     </connections>

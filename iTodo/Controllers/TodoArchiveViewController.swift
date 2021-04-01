@@ -35,15 +35,20 @@ class TodoArchiveViewController: UIViewController,  UITableViewDataSource, UITab
         
         
         let fetchRequest: NSFetchRequest<Task> = Task.fetchRequest()
-        let sortDescriptor = NSSortDescriptor(key: "createdDate", ascending: false)
-        fetchRequest.sortDescriptors = [sortDescriptor]
+        let sortDescriptorDate = NSSortDescriptor(key: "createdDate", ascending: false)
+        let sortDescriptorStatus = NSSortDescriptor(key: "status", ascending: false)
+        fetchRequest.sortDescriptors = [sortDescriptorDate, sortDescriptorStatus]
+        
+        //fetchRequest.propertiesToGroupBy = ["createdDate", "status"]
+        //fetchRequest.propertiesToFetch = ["createdDate", "status"]
+    
         
         let today = NSDate()
        
         let datePredicate = NSPredicate(format: "createdDate < %@  ", today as NSDate)
         fetchRequest.predicate = datePredicate
         
-        fetchResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: dataController.viewContext, sectionNameKeyPath: nil, cacheName: nil)
+        fetchResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: dataController.viewContext, sectionNameKeyPath: "createdDate", cacheName: nil)
         
         fetchResultsController.delegate = self
         
@@ -53,19 +58,30 @@ class TodoArchiveViewController: UIViewController,  UITableViewDataSource, UITab
             fatalError("The fetch could not be performed: \(error.localizedDescription)")
         }
         
+        print(fetchResultsController.fetchedObjects)
         
     }
 
     // MARK: - Table view data source
 
    func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 1
+        
+        if let sections = fetchResultsController.sections{
+            print("section count: \(sections.count)")
+            return sections.count
+        }
+        return 0
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return fetchResultsController.sections?[0].numberOfObjects ?? 0
+        
+        if let sections = fetchResultsController.sections {
+            let currentSection = sections[section]
+            
+            return currentSection.numberOfObjects
+        }
+        
+        return  0
     }
 
     
@@ -92,58 +108,22 @@ class TodoArchiveViewController: UIViewController,  UITableViewDataSource, UITab
         return cell
     }
     
+    /*
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if let sections = fetchResultsController.sections {
+            let currentSection = sections[section]
+            
+            return currentSection.name
+        }
+        return nil
+    }
+    */
     func getFormattedDate(date: Date, format: String) -> String {
             let dateformat = DateFormatter()
             dateformat.dateFormat = format
             return dateformat.string(from: date)
     }
 
-    
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
 
