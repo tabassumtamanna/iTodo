@@ -17,12 +17,19 @@ class TodoArchiveViewController: UIViewController,  UITableViewDataSource, UITab
     // MARK: - Variables
     var dataController: DataController!
     var fetchResultsController: NSFetchedResultsController<Task>!
-    var sections = [MonthSection]()
+    var sections = [GroupedSection<Date, Task>]()
     
-    // MARK: - struct: Month Section
-    struct MonthSection{
-        var date: Date
-        var taskList : [Task]
+    // MARK: - GroupedS ection
+    struct GroupedSection<SectionItem : Hashable, RowItem>{
+        
+        var sectionItem : SectionItem
+        var rowItem : [RowItem]
+        
+        static func group(rows : [RowItem], by criteria : (RowItem) -> SectionItem) -> [GroupedSection<SectionItem, RowItem>] {
+            let groups = Dictionary(grouping: rows, by: criteria)
+            
+            return groups.map(GroupedSection.init(sectionItem: rowItem:))
+        }
     }
     
     // MARK: - View Did Load
@@ -34,13 +41,9 @@ class TodoArchiveViewController: UIViewController,  UITableViewDataSource, UITab
         
         setupFetchResultsController()
         
-        let groups = Dictionary(grouping: self.fetchResultsController.fetchedObjects!) { (fetchedObject) in
-            return firstDay(date: fetchedObject.createdDate!)
-        }
+        self.sections = GroupedSection.group(rows: self.fetchResultsController.fetchedObjects!, by: {firstDay(date: $0.createdDate!)})
+        self.sections.sort { (lhs, rhs) in lhs.sectionItem > rhs.sectionItem}
         
-        self.sections = groups.map(MonthSection.init(date:taskList:))
-        self.sections.sort { (lhs, rhs) in lhs.date > rhs.date}
-        print(self.sections)
     }
     
     // MARK: - First Day
@@ -88,7 +91,7 @@ class TodoArchiveViewController: UIViewController,  UITableViewDataSource, UITab
     // MARK: - Title For Header In Section
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         let section = self.sections[section]
-        let date = section.date
+        let date = section.sectionItem
         
         let formatingDate = getFormattedDate(date: date, format: "MMM dd, yyyy")
         
@@ -99,7 +102,7 @@ class TodoArchiveViewController: UIViewController,  UITableViewDataSource, UITab
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let section = self.sections[section]
         
-        return  section.taskList.count
+        return  section.rowItem.count
     }
 
     // MARK: - Cell For Row At
@@ -109,7 +112,7 @@ class TodoArchiveViewController: UIViewController,  UITableViewDataSource, UITab
         
         //let task = fetchResultsController.object(at: indexPath)
         let section = self.sections[indexPath.section]
-        let task = section.taskList[indexPath.row]
+        let task = section.rowItem[indexPath.row]
         
         cell.textLabel?.text = task.taskTitle
         cell.textLabel?.textColor =  task.status ? .gray : .black
