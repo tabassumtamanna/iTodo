@@ -64,7 +64,8 @@ class TodoArchiveViewController: UIViewController,  UITableViewDataSource, UITab
         
         
         let today = NSDate()
-       
+         
+        
         let datePredicate = NSPredicate(format: "createdDate < %@  ", today as NSDate)
         fetchRequest.predicate = datePredicate
         

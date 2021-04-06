@@ -118,7 +118,8 @@ class TodoListViewController: UIViewController, UITextFieldDelegate, NSFetchedRe
         let taskToUpdate = fetchResultsController.object(at: indexPath)
         
         taskToUpdate.status = status
-        taskToUpdate.completedDate = Date()
+        
+        taskToUpdate.completedDate = status ? Date() : nil
         
         do {
             try dataController.viewContext.save()
@@ -214,7 +215,7 @@ extension TodoListViewController : UITableViewDataSource, UITableViewDelegate {
             deleteTask(at: indexPath)
             tableView.reloadData()
             
-        }
+        } 	
     }
     
 }
