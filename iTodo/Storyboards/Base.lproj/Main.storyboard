@@ -45,7 +45,7 @@
             </objects>
             <point key="canvasLocation" x="-1149" y="-64"/>
         </scene>
-        <!--ToDo-->
+        <!--To Do List-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController storyboardIdentifier="TodoListViewController" id="BYZ-38-t0r" customClass="TodoListViewController" customModule="iTodo" customModuleProvider="target" sceneMemberID="viewController">
@@ -124,7 +124,7 @@
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Tcz-OW-hrP" secondAttribute="trailing" constant="20" id="okF-LD-TqO"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="ToDo" id="vgH-q5-02k"/>
+                    <navigationItem key="navigationItem" title="To Do List" id="vgH-q5-02k"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="addTaskButton" destination="MbJ-rU-bRd" id="Ycb-Dh-aCf"/>
@@ -134,7 +134,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-465" y="-64"/>
+            <point key="canvasLocation" x="-401" y="-85"/>
         </scene>
         <!--Archive List-->
         <scene sceneID="QP3-H4-goh">

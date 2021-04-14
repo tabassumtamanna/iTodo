@@ -137,16 +137,20 @@ class TodoListViewController: UIViewController, UITextFieldDelegate, NSFetchedRe
     // MARK: - Text Field Should Return
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         view.endEditing(true)
+        
+        addTask()
+
         return true
     }
     
     // MARK: - Text Field Did End Editing
     func textFieldDidEndEditing(_ textField: UITextField) {
-        addTask()
-        
+                
         self.taskTitle.becomeFirstResponder()
     }
     
+   
+        
     // MARK: -  Show Failure Message
     func showFailureMessage(title: String, message: String) {
         let alertVC = UIAlertController(title: title, message: message, preferredStyle: .alert)

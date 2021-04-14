@@ -39,11 +39,15 @@ class TodoArchiveViewController: UIViewController,  UITableViewDataSource, UITab
         self.archiveTableView.delegate = self
         self.archiveTableView.dataSource = self
         
+    }
+    
+    // MARK: - View Did Appear
+    override func viewWillAppear(_ animated: Bool) {
+        
         setupFetchResultsController()
         
         self.sections = GroupedSection.group(rows: self.fetchResultsController.fetchedObjects!, by: {firstDay(date: $0.createdDate!)})
         self.sections.sort { (lhs, rhs) in lhs.sectionItem > rhs.sectionItem}
-        
     }
     
     // MARK: - First Day
@@ -63,10 +67,9 @@ class TodoArchiveViewController: UIViewController,  UITableViewDataSource, UITab
         fetchRequest.sortDescriptors = [sortDescriptorDate, sortDescriptorStatus]
         
         
-        let today = NSDate()
-         
+        let yesterday = Calendar.current.date(byAdding: .day, value: -1, to: NSDate() as Date)
         
-        let datePredicate = NSPredicate(format: "createdDate < %@  ", today as NSDate)
+        let datePredicate = NSPredicate(format: "createdDate <= %@  ", yesterday! as NSDate)
         fetchRequest.predicate = datePredicate
         
         fetchResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: dataController.viewContext, sectionNameKeyPath: "createdDate", cacheName: nil)
