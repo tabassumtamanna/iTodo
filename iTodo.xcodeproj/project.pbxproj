@@ -3,23 +3,31 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C85EAD0D24E84214A232A5D6 /* Pods_iTodo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 13B3E5333CB18C68CEF4C4C5 /* Pods_iTodo.framework */; };
+		E99F7DEB262A9ECE00B0FE1E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E99F7DEA262A9ECE00B0FE1E /* GoogleService-Info.plist */; };
+		E99F7DF1262AAA3A00B0FE1E /* TodoListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E99F7DF0262AAA3A00B0FE1E /* TodoListViewController.swift */; };
 		E9A8DD6725F9C89500B1A2ED /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9A8DD6625F9C89500B1A2ED /* AppDelegate.swift */; };
 		E9A8DD6925F9C89500B1A2ED /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9A8DD6825F9C89500B1A2ED /* SceneDelegate.swift */; };
 		E9A8DD6E25F9C89500B1A2ED /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E9A8DD6C25F9C89500B1A2ED /* Main.storyboard */; };
 		E9A8DD7025F9C89600B1A2ED /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E9A8DD6F25F9C89600B1A2ED /* Assets.xcassets */; };
 		E9A8DD7325F9C89600B1A2ED /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E9A8DD7125F9C89600B1A2ED /* LaunchScreen.storyboard */; };
 		E9AECEC0260DA1CB008ED22E /* TodoArchiveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9AECEBF260DA1CB008ED22E /* TodoArchiveViewController.swift */; };
-		E9F7961A25F9D75000955DE8 /* TodoListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F7961925F9D75000955DE8 /* TodoListViewController.swift */; };
+		E9F7961A25F9D75000955DE8 /* TodoListViewControllerOld.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F7961925F9D75000955DE8 /* TodoListViewControllerOld.swift */; };
 		E9F796202606FD3100955DE8 /* TaskListViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F7961F2606FD3100955DE8 /* TaskListViewCell.swift */; };
 		E9F79624260ADFEF00955DE8 /* iTodo.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E9F79622260ADFEF00955DE8 /* iTodo.xcdatamodeld */; };
 		E9F79628260AE19D00955DE8 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F79627260AE19D00955DE8 /* DataController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		13B3E5333CB18C68CEF4C4C5 /* Pods_iTodo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iTodo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3DB9E1395B614825A35EB8CF /* Pods-iTodo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iTodo.debug.xcconfig"; path = "Target Support Files/Pods-iTodo/Pods-iTodo.debug.xcconfig"; sourceTree = "<group>"; };
+		E281F1FFD3FCE40D01C4064E /* Pods-iTodo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iTodo.release.xcconfig"; path = "Target Support Files/Pods-iTodo/Pods-iTodo.release.xcconfig"; sourceTree = "<group>"; };
+		E99F7DEA262A9ECE00B0FE1E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		E99F7DF0262AAA3A00B0FE1E /* TodoListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoListViewController.swift; sourceTree = "<group>"; };
 		E9A8DD6325F9C89500B1A2ED /* iTodo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iTodo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E9A8DD6625F9C89500B1A2ED /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E9A8DD6825F9C89500B1A2ED /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -28,7 +36,7 @@
 		E9A8DD7225F9C89600B1A2ED /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E9A8DD7425F9C89600B1A2ED /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = iTodo/Resources/Info.plist; sourceTree = SOURCE_ROOT; };
 		E9AECEBF260DA1CB008ED22E /* TodoArchiveViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoArchiveViewController.swift; sourceTree = "<group>"; };
-		E9F7961925F9D75000955DE8 /* TodoListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoListViewController.swift; sourceTree = "<group>"; };
+		E9F7961925F9D75000955DE8 /* TodoListViewControllerOld.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoListViewControllerOld.swift; sourceTree = "<group>"; };
 		E9F7961F2606FD3100955DE8 /* TaskListViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListViewCell.swift; sourceTree = "<group>"; };
 		E9F79623260ADFEF00955DE8 /* iTodo.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = iTodo.xcdatamodel; sourceTree = "<group>"; };
 		E9F79627260AE19D00955DE8 /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
@@ -39,17 +47,37 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C85EAD0D24E84214A232A5D6 /* Pods_iTodo.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0384ED12049A8CD18CDA8A97 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				3DB9E1395B614825A35EB8CF /* Pods-iTodo.debug.xcconfig */,
+				E281F1FFD3FCE40D01C4064E /* Pods-iTodo.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		77EBB770A073CC007E992FFB /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				13B3E5333CB18C68CEF4C4C5 /* Pods_iTodo.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		E9A8DD5A25F9C89500B1A2ED = {
 			isa = PBXGroup;
 			children = (
 				E9A8DD6525F9C89500B1A2ED /* iTodo */,
 				E9A8DD6425F9C89500B1A2ED /* Products */,
+				0384ED12049A8CD18CDA8A97 /* Pods */,
+				77EBB770A073CC007E992FFB /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -93,9 +121,10 @@
 		E9A8DD8325F9D0D300B1A2ED /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				E9F7961925F9D75000955DE8 /* TodoListViewController.swift */,
 				E9F7961F2606FD3100955DE8 /* TaskListViewCell.swift */,
 				E9AECEBF260DA1CB008ED22E /* TodoArchiveViewController.swift */,
+				E9F7961925F9D75000955DE8 /* TodoListViewControllerOld.swift */,
+				E99F7DF0262AAA3A00B0FE1E /* TodoListViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -104,6 +133,7 @@
 			isa = PBXGroup;
 			children = (
 				E9A8DD7425F9C89600B1A2ED /* Info.plist */,
+				E99F7DEA262A9ECE00B0FE1E /* GoogleService-Info.plist */,
 				E9A8DD6F25F9C89600B1A2ED /* Assets.xcassets */,
 			);
 			path = Resources;
@@ -134,9 +164,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = E9A8DD7725F9C89600B1A2ED /* Build configuration list for PBXNativeTarget "iTodo" */;
 			buildPhases = (
+				441A00047210A9243D0079B0 /* [CP] Check Pods Manifest.lock */,
 				E9A8DD5F25F9C89500B1A2ED /* Sources */,
 				E9A8DD6025F9C89500B1A2ED /* Frameworks */,
 				E9A8DD6125F9C89500B1A2ED /* Resources */,
+				44A96C83442CFEC2E2F70FF8 /* [CP] Embed Pods Frameworks */,
+				DDEB24747CF513CF1F6E4E20 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -186,21 +219,82 @@
 			files = (
 				E9A8DD7325F9C89600B1A2ED /* LaunchScreen.storyboard in Resources */,
 				E9A8DD7025F9C89600B1A2ED /* Assets.xcassets in Resources */,
+				E99F7DEB262A9ECE00B0FE1E /* GoogleService-Info.plist in Resources */,
 				E9A8DD6E25F9C89500B1A2ED /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		441A00047210A9243D0079B0 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-iTodo-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		44A96C83442CFEC2E2F70FF8 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-iTodo/Pods-iTodo-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-iTodo/Pods-iTodo-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-iTodo/Pods-iTodo-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		DDEB24747CF513CF1F6E4E20 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-iTodo/Pods-iTodo-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-iTodo/Pods-iTodo-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-iTodo/Pods-iTodo-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		E9A8DD5F25F9C89500B1A2ED /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E99F7DF1262AAA3A00B0FE1E /* TodoListViewController.swift in Sources */,
 				E9F796202606FD3100955DE8 /* TaskListViewCell.swift in Sources */,
 				E9F79628260AE19D00955DE8 /* DataController.swift in Sources */,
 				E9F79624260ADFEF00955DE8 /* iTodo.xcdatamodeld in Sources */,
-				E9F7961A25F9D75000955DE8 /* TodoListViewController.swift in Sources */,
+				E9F7961A25F9D75000955DE8 /* TodoListViewControllerOld.swift in Sources */,
 				E9A8DD6725F9C89500B1A2ED /* AppDelegate.swift in Sources */,
 				E9AECEC0260DA1CB008ED22E /* TodoArchiveViewController.swift in Sources */,
 				E9A8DD6925F9C89500B1A2ED /* SceneDelegate.swift in Sources */,
@@ -347,6 +441,7 @@
 		};
 		E9A8DD7825F9C89600B1A2ED /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3DB9E1395B614825A35EB8CF /* Pods-iTodo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -365,6 +460,7 @@
 		};
 		E9A8DD7925F9C89600B1A2ED /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E281F1FFD3FCE40D01C4064E /* Pods-iTodo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;

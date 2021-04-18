@@ -17,7 +17,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
         guard let _ = (scene as? UIWindowScene) else { return }
         
+        /*
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        
         appDelegate.dataController.load()
         
         let navigationController = window?.rootViewController?.children[0] as! UINavigationController
@@ -34,6 +36,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let todoArchiveViewController = navigationController1.topViewController as! TodoArchiveViewController
         
         todoArchiveViewController.dataController = appDelegate.dataController
+    */
         
     }
 }
