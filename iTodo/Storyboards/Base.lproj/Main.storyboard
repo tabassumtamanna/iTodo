@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="NK3-Yu-ZOk">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Fsr-34-qeW">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
@@ -8,10 +8,49 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--Login View Controller-->
+        <scene sceneID="npJ-yg-d0d">
+            <objects>
+                <viewController id="Fsr-34-qeW" customClass="LoginViewController" customModule="iTodo" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="76d-KS-FIg">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5hv-V1-Dx9">
+                                <rect key="frame" x="116" y="422" width="183" height="52"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.067763365810000004" green="0.69789862629999999" blue="0.89414525030000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <state key="normal" title="SIGN IN">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="showLoginView:" destination="Fsr-34-qeW" eventType="touchUpInside" id="iAp-h7-VDo"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Todo List" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7g5-10-Un6">
+                                <rect key="frame" x="116" y="170" width="183" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <color key="textColor" red="0.067763365810000004" green="0.69789862629999999" blue="0.89414525030000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="0Xs-Fv-gce"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <connections>
+                        <outlet property="signInButton" destination="5hv-V1-Dx9" id="cyC-ul-Bb0"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lFL-Lg-sPp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-3126.0869565217395" y="-33.482142857142854"/>
+        </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="3CZ-SW-GTi">
             <objects>
-                <tabBarController id="NK3-Yu-ZOk" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="TodoListTabBarViewController" id="NK3-Yu-ZOk" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="07i-QD-d9v">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -24,7 +63,7 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yLA-e5-uiQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2159" y="-44"/>
+            <point key="canvasLocation" x="-2294" y="-33"/>
         </scene>
         <!--List-->
         <scene sceneID="gii-3Q-lKL">
@@ -43,7 +82,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zQO-Jg-FYu" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1149" y="-64"/>
+            <point key="canvasLocation" x="-1384" y="-38"/>
         </scene>
         <!--To Do List-->
         <scene sceneID="tne-QT-ifu">
@@ -132,10 +171,10 @@
             </objects>
             <point key="canvasLocation" x="409" y="-77"/>
         </scene>
-        <!--Todo List View Controller-->
+        <!--Todo List-->
         <scene sceneID="mH2-Cg-xJ3">
             <objects>
-                <viewController id="qnf-Fo-auv" customClass="TodoListViewController" customModule="iTodo" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LoginViewController" id="qnf-Fo-auv" customClass="TodoListViewController" customModule="iTodo" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="dQl-ES-JeC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -218,7 +257,14 @@
                             <constraint firstItem="goy-tF-jCH" firstAttribute="top" secondItem="7ur-4u-gen" secondAttribute="top" constant="10" id="VIo-FS-Eso"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="dJz-Ej-Nsg"/>
+                    <navigationItem key="navigationItem" title="Todo List" id="dJz-Ej-Nsg">
+                        <barButtonItem key="rightBarButtonItem" title="Sign Out" id="BvV-r2-Irs">
+                            <connections>
+                                <action selector="signOutTapped:" destination="qnf-Fo-auv" id="2us-46-uSP"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="addTaskButton" destination="pnM-E5-x5N" id="vfC-27-ctM"/>
                         <outlet property="taskTableView" destination="Qhm-mA-sT1" id="mxY-Yw-52C"/>
@@ -227,7 +273,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DXp-fY-iTl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-420" y="-64"/>
+            <point key="canvasLocation" x="-612" y="-33"/>
         </scene>
         <!--Archive List-->
         <scene sceneID="QP3-H4-goh">
@@ -288,6 +334,10 @@
                                                 </tableViewCellContentView>
                                             </tableViewCell>
                                         </prototypes>
+                                        <connections>
+                                            <outlet property="dataSource" destination="Idd-se-wvs" id="31a-M0-uk3"/>
+                                            <outlet property="delegate" destination="Idd-se-wvs" id="iKB-06-Jw5"/>
+                                        </connections>
                                     </tableView>
                                 </subviews>
                             </stackView>
@@ -303,7 +353,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Archive List" id="fs9-qW-1Rd"/>
                     <connections>
-                        <outlet property="archiveTableView" destination="pbM-nZ-wZx" id="RrS-jA-xg1"/>
+                        <outlet property="taskArchiveTableView" destination="pbM-nZ-wZx" id="vE9-yW-pPh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WmL-s8-R1R" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

@@ -2,144 +2,113 @@
 //  TodoArchiveViewController.swift
 //  iTodo
 //
-//  Created by Tabassum Tamanna on 3/25/21.
+//  Created by Tabassum Tamanna on 4/18/21.
 //
 
 import UIKit
-import CoreData
+import Firebase
 
-class TodoArchiveViewController: UIViewController,  UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate{
+class TodoArchiveViewController: UIViewController {
 
-    // MARK:- IBOutlets
     
-    @IBOutlet weak var archiveTableView: UITableView!
+    @IBOutlet weak var taskArchiveTableView: UITableView!
     
-    // MARK: - Variables
-    var dataController: DataController!
-    var fetchResultsController: NSFetchedResultsController<Task>!
-    var sections = [GroupedSection<Date, Task>]()
+    // MARK: - Properties
+    var ref: DatabaseReference!
+    var taskList: [DataSnapshot]! = []
+   
+    var displayName = ""
+    fileprivate var _refHandle: DatabaseHandle!
     
-    // MARK: - GroupedS ection
-    struct GroupedSection<SectionItem : Hashable, RowItem>{
-        
-        var sectionItem : SectionItem
-        var rowItem : [RowItem]
-        
-        static func group(rows : [RowItem], by criteria : (RowItem) -> SectionItem) -> [GroupedSection<SectionItem, RowItem>] {
-            let groups = Dictionary(grouping: rows, by: criteria)
-            
-            return groups.map(GroupedSection.init(sectionItem: rowItem:))
-        }
-    }
     
     // MARK: - View Did Load
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        self.taskArchiveTableView.delegate = self
+        self.taskArchiveTableView.dataSource = self
+       
         
-        self.archiveTableView.delegate = self
-        self.archiveTableView.dataSource = self
+        configureDatabase()
         
+        self.displayName = String(Auth.auth().currentUser?.displayName ?? "")
+       
     }
     
     // MARK: - View Did Appear
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
-        setupFetchResultsController()
-        
-        self.sections = GroupedSection.group(rows: self.fetchResultsController.fetchedObjects!, by: {firstDay(date: $0.createdDate!)})
-        self.sections.sort { (lhs, rhs) in lhs.sectionItem > rhs.sectionItem}
     }
     
-    // MARK: - First Day
-    fileprivate func firstDay(date: Date) ->  Date {
-        let calendar = Calendar.current
-        let components = calendar.dateComponents([.year, .month, .day], from: date)
-        return calendar.date(from: components)!
-    }
-    
-    // MARK: - Setup Fetch Results Controller
-    fileprivate func setupFetchResultsController(){
-        
-        
-        let fetchRequest: NSFetchRequest<Task> = Task.fetchRequest()
-        let sortDescriptorDate = NSSortDescriptor(key: "createdDate", ascending: false)
-        let sortDescriptorStatus = NSSortDescriptor(key: "status", ascending: false)
-        fetchRequest.sortDescriptors = [sortDescriptorDate, sortDescriptorStatus]
-        
-        
-        let yesterday = Calendar.current.date(byAdding: .day, value: -1, to: NSDate() as Date)
-        
-        let datePredicate = NSPredicate(format: "createdDate <= %@  ", yesterday! as NSDate)
-        fetchRequest.predicate = datePredicate
-        
-        fetchResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: dataController.viewContext, sectionNameKeyPath: "createdDate", cacheName: nil)
-        
-        fetchResultsController.delegate = self
+    // MARK: - Actions signOutTapped
+    @IBAction func signOutTapped(_ sender: Any) {
         
         do {
-            try fetchResultsController.performFetch()
+            try Auth.auth().signOut()
+            
+            self.dismiss(animated: true, completion: nil)
+            
         } catch {
-            fatalError("The fetch could not be performed: \(error.localizedDescription)")
+            print("unable to sign out: \(error)")
         }
+    }
+    
+    // MARK: - Config
+    
+    func configureDatabase() {
+        self.ref = Database.database().reference()
+        
+        let yesterday = Calendar.current.date(byAdding: .day, value: -1, to: Date())!
+        let endDate = getFormattedDate(date: yesterday, format: "yyyy-MM-dd HH:mm:ss")
+        
+        _refHandle = ref.child("Tasks").queryOrdered(byChild: "taskCreated").queryEnding(atValue: endDate).observe(.childAdded){ (snapshot: DataSnapshot) in
+            
+            self.taskList.append(snapshot)
+            self.taskArchiveTableView.insertRows(at: [IndexPath(row: self.taskList.count - 1, section: 0)], with: .automatic)
+        }
+    }
+    
+    deinit {
+        self.ref.child("Tasks").removeObserver(withHandle: _refHandle)
         
     }
+    
+    
+}
 
-    // MARK: - Table view data source
-    // MARK: - Number Of Sections
-   func numberOfSections(in tableView: UITableView) -> Int {
-        
-        return self.sections.count
-    }
-    
-    // MARK: - Title For Header In Section
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        let section = self.sections[section]
-        let date = section.sectionItem
-        
-        let formatingDate = getFormattedDate(date: date, format: "MMM dd, yyyy")
-        
-        return formatingDate
-    }
-    
+
+extension TodoArchiveViewController:  UITableViewDataSource, UITableViewDelegate {
     // MARK: - Number Of Rows In Section
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let section = self.sections[section]
-        
-        return  section.rowItem.count
+       
+        return  taskList.count
     }
-
+    
     // MARK: - Cell For Row At
-     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "TaskArchiveViewCell", for: indexPath)
        
+        let taskSnapshot: DataSnapshot! = taskList[indexPath.row]
+        let task = taskSnapshot.value as! [String: String]
+        let status = task[Tasks.status]
         
-        //let task = fetchResultsController.object(at: indexPath)
-        let section = self.sections[indexPath.section]
-        let task = section.rowItem[indexPath.row]
+        cell.textLabel?.text = task[Tasks.taskTitle]
+        cell.textLabel?.textColor =  status == "1" ? .gray : .black
         
-        cell.textLabel?.text = task.taskTitle
-        cell.textLabel?.textColor =  task.status ? .gray : .black
-        
-        if task.completedDate != nil {
-            let formatingDate = getFormattedDate(date: task.completedDate!, format: "MMM dd, yyyy hh:mm:ss a")
+        if let taskCompleted =  task[Tasks.taskCompleted] ,  taskCompleted != "" {
+            //let formatingDate = getFormattedDate(date: task[Tasks.taskCompleted], format: "MMM dd, yyyy hh:mm:ss a")
             
-            cell.detailTextLabel?.text = "Completion Date: " + formatingDate
+            cell.detailTextLabel?.text = "Completion Date: " + taskCompleted
             cell.detailTextLabel?.textColor = .gray
             
         } else {
-            cell.detailTextLabel?.text = ""
+            cell.detailTextLabel?.text = "Created Date: " + String(task[Tasks.taskCreated] ?? "")
         }
         
         return cell
     }
     
-    // MARK: - Get Formatted Date
-    func getFormattedDate(date: Date, format: String) -> String {
-            let dateformat = DateFormatter()
-            dateformat.dateFormat = format
-            return dateformat.string(from: date)
-    }
-
-
+   
 }
-

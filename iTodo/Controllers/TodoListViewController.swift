@@ -7,29 +7,24 @@
 
 import UIKit
 import Firebase
-import FirebaseUI
+
 
 class TodoListViewController: UIViewController {
 
-    
-    // MARK: - Properties
-    var ref: DatabaseReference!
-    var taskList: [DataSnapshot]! = []
-    fileprivate var _refHandle: DatabaseHandle!
-    
-    // MARK: -  TaskFields
-    struct TaskFields {
-        static let taskName = "task"
-        static let status = "status"
-        static let taskCreated = "taskCreated"
-        static let taskCompleted = "taskCompleted"
-        
-    }
     
     // MARK: - Outlets
     @IBOutlet weak var taskTextField: UITextField!
     @IBOutlet weak var addTaskButton: UIButton!
     @IBOutlet weak var taskTableView: UITableView!
+    
+    
+    // MARK: - Properties
+    var ref: DatabaseReference!
+    var taskList: [DataSnapshot]! = []
+    var displayName = ""
+    
+    fileprivate var _refHandle: DatabaseHandle!
+    
     
     // MARK: - View Did Load
     override func viewDidLoad() {
@@ -42,23 +37,51 @@ class TodoListViewController: UIViewController {
         
         configureDatabase()
         
-        
+        self.displayName = String(Auth.auth().currentUser?.displayName ?? "") 
+       
     }
+    
+    // MARK: - Actions
+    
+    @IBAction func addTaskTapped(_ sender: Any) {
+        let _ = textFieldShouldReturn(taskTextField)
+        self.taskTextField.text = ""
+    }
+    
+    // MARK: - signOutTapped
+    @IBAction func signOutTapped(_ sender: Any) {
+        
+        do {
+            try Auth.auth().signOut()
+            
+            self.dismiss(animated: true, completion: nil)
+            
+        } catch {
+            print("unable to sign out: \(error)")
+        }
+    }
+    
     
     // MARK: - Config
     
     func configureDatabase() {
         self.ref = Database.database().reference()
-        _refHandle = ref.child("Tasks").observe(.childAdded){ (snapshot: DataSnapshot) in
+        
+        //let currentDate = getFormattedDate(date: Date(), format: "yyyy-MM-dd HH:mm:ss")
+        
+        let yesterday = Calendar.current.date(byAdding: .day, value: -1, to: Date())!
+        let endDate = getFormattedDate(date: yesterday, format: "yyyy-MM-dd HH:mm:ss")
+        
+        _refHandle = ref.child("Tasks").queryOrdered(byChild: "taskCreated").queryStarting(atValue: endDate).observe(.childAdded){ (snapshot: DataSnapshot) in
             
             self.taskList.append(snapshot)
             self.taskTableView.insertRows(at: [IndexPath(row: self.taskList.count - 1, section: 0)], with: .automatic)
-            //self.scrollToBottomMessage()
         }
+       
     }
     
     deinit {
-        ref.child("Tasks").removeObserver(withHandle: _refHandle)
+        self.ref.child("Tasks").removeObserver(withHandle: _refHandle)
         
     }
     
@@ -68,15 +91,16 @@ class TodoListViewController: UIViewController {
     func addTask(data: [String:String]){
         
         var mdata = data
-        mdata[TaskFields.status] = "0"
+        mdata[Tasks.status] = "0"
         
         let date = Date()
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-        mdata[TaskFields.taskCreated] = dateFormatter.string(from: date)
-        mdata[TaskFields.taskCompleted] = ""
+        mdata[Tasks.taskCreated] = dateFormatter.string(from: date)
+        mdata[Tasks.taskCompleted] = ""
         
         self.ref.child("Tasks").childByAutoId().setValue(mdata)
+        
     }
     
     
@@ -88,15 +112,12 @@ class TodoListViewController: UIViewController {
         
         var task: [String: String] = [:]
         
-        task[TaskFields.status] = status ? "1" : "0"
+        task[Tasks.status] = status ? "1" : "0"
         
         if status {
-            let date = Date()
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-            task[TaskFields.taskCompleted] = dateFormatter.string(from: date)
+            task[Tasks.taskCompleted] = getFormattedDate(date: Date(), format: "yyyy-MM-dd HH:mm:ss")
         } else {
-            task[TaskFields.taskCompleted] = ""
+            task[Tasks.taskCompleted] = ""
         }
     
         self.ref.child("Tasks").child(key).updateChildValues(task)
@@ -110,16 +131,9 @@ class TodoListViewController: UIViewController {
         
         self.ref.child("Tasks").child(key).removeValue() { error, arr  in
             if error != nil {
-                print("error \(error)")
+                print("error \(error?.localizedDescription ?? "")")
             }
         }
-    }
-    
-    // MARK: - Actions
-    
-    @IBAction func addTaskTapped(_ sender: Any) {
-        let _ = textFieldShouldReturn(taskTextField)
-        self.taskTextField.text = ""
     }
     
     
@@ -128,7 +142,7 @@ class TodoListViewController: UIViewController {
 extension TodoListViewController:  UITableViewDataSource, UITableViewDelegate {
     // MARK: - Number Of Rows In Section
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-       
+        
         return  taskList.count
     }
     
@@ -139,7 +153,7 @@ extension TodoListViewController:  UITableViewDataSource, UITableViewDelegate {
        
         let taskSnapshot: DataSnapshot! = taskList[indexPath.row]
         let task = taskSnapshot.value as! [String: String]
-        let status = task[TaskFields.status]
+        let status = task[Tasks.status]
         
         if status == "1" {
             cell.checkboxImage.image = UIImage(named: "checked")
@@ -149,7 +163,7 @@ extension TodoListViewController:  UITableViewDataSource, UITableViewDelegate {
             cell.taskLabel.textColor = .black
         }
         
-        cell.taskLabel.text = task[TaskFields.taskName]
+        cell.taskLabel.text = task[Tasks.taskTitle]
         
         return cell
     }
