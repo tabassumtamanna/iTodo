@@ -13,5 +13,6 @@ struct Tasks {
     static let status           = "status"
     static let taskCreated      = "taskCreated"
     static let taskCompleted    = "taskCompleted"
+    static let userId           = "userId"
     
 }

@@ -68,12 +68,14 @@ class TodoListViewController: UIViewController {
         self.ref = Database.database().reference()
         
         //let currentDate = getFormattedDate(date: Date(), format: "yyyy-MM-dd HH:mm:ss")
-        
+        let userID : String = (Auth.auth().currentUser?.uid)!
+        print("userID: \(userID)")
         let yesterday = Calendar.current.date(byAdding: .day, value: -1, to: Date())!
         let endDate = getFormattedDate(date: yesterday, format: "yyyy-MM-dd HH:mm:ss")
         
         _refHandle = ref.child("Tasks").queryOrdered(byChild: "taskCreated").queryStarting(atValue: endDate).observe(.childAdded){ (snapshot: DataSnapshot) in
-            
+        
+        //_refHandle = ref.child("Tasks").queryOrdered(byChild: "userId").queryStarting(atValue: userID).queryEnding(atValue: userID).observe(.childAdded){ (snapshot: DataSnapshot) in
             self.taskList.append(snapshot)
             self.taskTableView.insertRows(at: [IndexPath(row: self.taskList.count - 1, section: 0)], with: .automatic)
         }
@@ -98,6 +100,7 @@ class TodoListViewController: UIViewController {
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
         mdata[Tasks.taskCreated] = dateFormatter.string(from: date)
         mdata[Tasks.taskCompleted] = ""
+        mdata[Tasks.userId] = Auth.auth().currentUser?.uid
         
         self.ref.child("Tasks").childByAutoId().setValue(mdata)
         

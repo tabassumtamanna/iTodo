@@ -38,7 +38,7 @@ class LoginViewController: UIViewController {
     // MARK: Config
     
     func configureAuth() {
-        let provider: [FUIAuthProvider] = [FUIGoogleAuth()]
+        let provider: [FUIAuthProvider] = [FUIGoogleAuth(), FUIEmailAuth()]
         FUIAuth.defaultAuthUI()?.providers = provider
         
         // listen for changes in the authorization state
@@ -46,6 +46,7 @@ class LoginViewController: UIViewController {
             
             // check if there is a current user
             if let activeUser = user {
+                
                 // check if the current app user is the current FIRUser
                 if self.user != activeUser {
                     self.user = activeUser
