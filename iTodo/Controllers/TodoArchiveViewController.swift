@@ -28,7 +28,6 @@ class TodoArchiveViewController: UIViewController {
         self.taskArchiveTableView.delegate = self
         self.taskArchiveTableView.dataSource = self
        
-        
         configureDatabase()
         
         self.displayName = String(Auth.auth().currentUser?.displayName ?? "")
@@ -63,11 +62,14 @@ class TodoArchiveViewController: UIViewController {
         let yesterday = Calendar.current.date(byAdding: .day, value: -1, to: Date())!
         let endDate = getFormattedDate(date: yesterday, format: "yyyy-MM-dd HH:mm:ss")
         
-        //_refHandle = ref.child("Tasks").queryOrdered(byChild: "taskCreated").queryEnding(atValue: endDate).observe(.childAdded){ (snapshot: DataSnapshot) in
-        
         _refHandle = ref.child("Tasks").queryOrdered(byChild: "userId").queryStarting(atValue: userID).queryEnding(atValue: userID).observe(.childAdded){ (snapshot: DataSnapshot) in
-            self.taskList.append(snapshot)
-            self.taskArchiveTableView.insertRows(at: [IndexPath(row: self.taskList.count - 1, section: 0)], with: .automatic)
+            
+            let task = snapshot.value as! [String: String]
+            if let taskCreated = task[Tasks.taskCreated], taskCreated < endDate {
+                
+                self.taskList.append(snapshot)
+                self.taskArchiveTableView.insertRows(at: [IndexPath(row: self.taskList.count - 1, section: 0)], with: .automatic)
+            }
         }
     }
     

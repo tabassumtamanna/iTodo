@@ -16,12 +16,12 @@ class TodoListViewController: UIViewController {
     @IBOutlet weak var taskTextField: UITextField!
     @IBOutlet weak var addTaskButton: UIButton!
     @IBOutlet weak var taskTableView: UITableView!
+   
     
     
     // MARK: - Properties
     var ref: DatabaseReference!
     var taskList: [DataSnapshot]! = []
-    var displayName = ""
     
     fileprivate var _refHandle: DatabaseHandle!
     
@@ -37,7 +37,7 @@ class TodoListViewController: UIViewController {
         
         configureDatabase()
         
-        self.displayName = String(Auth.auth().currentUser?.displayName ?? "") 
+       // self.displayName.title = String(Auth.auth().currentUser?.email?.components(separatedBy: "@")[0] ?? "")
        
     }
     
@@ -53,7 +53,6 @@ class TodoListViewController: UIViewController {
         
         do {
             try Auth.auth().signOut()
-            
             self.dismiss(animated: true, completion: nil)
             
         } catch {
@@ -73,18 +72,20 @@ class TodoListViewController: UIViewController {
         let yesterday = Calendar.current.date(byAdding: .day, value: -1, to: Date())!
         let endDate = getFormattedDate(date: yesterday, format: "yyyy-MM-dd HH:mm:ss")
         
-        _refHandle = ref.child("Tasks").queryOrdered(byChild: "taskCreated").queryStarting(atValue: endDate).observe(.childAdded){ (snapshot: DataSnapshot) in
+        _refHandle = ref.child("Tasks").queryOrdered(byChild: "userId").queryStarting(atValue: userID).queryEnding(atValue: userID).observe(.childAdded){ (snapshot: DataSnapshot) in
+            
+            let task = snapshot.value as! [String: String]
+            if let taskCreated = task[Tasks.taskCreated], taskCreated >= endDate {
         
-        //_refHandle = ref.child("Tasks").queryOrdered(byChild: "userId").queryStarting(atValue: userID).queryEnding(atValue: userID).observe(.childAdded){ (snapshot: DataSnapshot) in
-            self.taskList.append(snapshot)
-            self.taskTableView.insertRows(at: [IndexPath(row: self.taskList.count - 1, section: 0)], with: .automatic)
+                self.taskList.append(snapshot)
+                self.taskTableView.insertRows(at: [IndexPath(row: self.taskList.count - 1, section: 0)], with: .automatic)
+            }
         }
        
     }
     
     deinit {
         self.ref.child("Tasks").removeObserver(withHandle: _refHandle)
-        
     }
     
 

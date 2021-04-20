@@ -63,6 +63,7 @@ class LoginViewController: UIViewController {
     }
     
     deinit {
+        
         Auth.auth().removeStateDidChangeListener(_authHandle)
     }
     
