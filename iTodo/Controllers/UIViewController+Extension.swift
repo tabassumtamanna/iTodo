@@ -11,6 +11,21 @@ import Firebase
 extension  UIViewController {
 
     
+    // MARK: - signOutTapped
+    @IBAction func signOutTapped(_ sender: Any) {
+        
+        do {
+            try Auth.auth().signOut()
+            
+            print("signOutTapped: List \(self.view.window?.rootViewController)")
+            
+            self.view.window?.rootViewController?.dismiss(animated: true, completion: nil)
+            
+        } catch {
+            print("unable to sign out: \(error)")
+        }
+    }
+    
     // MARK: - Get Formatted Date
     func getFormattedDate(date: Date, format: String) -> String {
             let dateformat = DateFormatter()

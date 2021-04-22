@@ -34,28 +34,13 @@ class TodoArchiveViewController: UIViewController {
        
     }
     
-    // MARK: - View Did Appear
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-    }
     
-    // MARK: - Actions signOutTapped
-    @IBAction func signOutTapped(_ sender: Any) {
-        
-        do {
-            try Auth.auth().signOut()
-            
-            self.dismiss(animated: true, completion: nil)
-            
-        } catch {
-            print("unable to sign out: \(error)")
-        }
-    }
     
     // MARK: - Config
     
     func configureDatabase() {
+        
+        print("configureDatabase: Archieve")
         self.ref = Database.database().reference()
         
         let userID : String = (Auth.auth().currentUser?.uid)!

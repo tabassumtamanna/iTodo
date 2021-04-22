@@ -35,12 +35,16 @@ class TodoListViewController: UIViewController {
         self.taskTextField.delegate = self
         self.taskTextField.text = ""
         
+        self.tabBarController?.navigationItem.hidesBackButton = true
+        print("viewDidLoad:: List")
         configureDatabase()
         
        // self.displayName.title = String(Auth.auth().currentUser?.email?.components(separatedBy: "@")[0] ?? "")
        
     }
     
+    
+   
     // MARK: - Actions
     
     @IBAction func addTaskTapped(_ sender: Any) {
@@ -48,22 +52,12 @@ class TodoListViewController: UIViewController {
         self.taskTextField.text = ""
     }
     
-    // MARK: - signOutTapped
-    @IBAction func signOutTapped(_ sender: Any) {
-        
-        do {
-            try Auth.auth().signOut()
-            self.dismiss(animated: true, completion: nil)
-            
-        } catch {
-            print("unable to sign out: \(error)")
-        }
-    }
     
-    
+   
     // MARK: - Config
     
     func configureDatabase() {
+        print("configureDatabase: List")
         self.ref = Database.database().reference()
         
         //let currentDate = getFormattedDate(date: Date(), format: "yyyy-MM-dd HH:mm:ss")
