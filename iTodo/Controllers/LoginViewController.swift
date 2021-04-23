@@ -38,6 +38,7 @@ class LoginViewController: UIViewController {
     // MARK: Config
     
     func configureAuth() {
+        
         let provider: [FUIAuthProvider] = [FUIGoogleAuth(), FUIEmailAuth()]
         FUIAuth.defaultAuthUI()?.providers = provider
         
@@ -76,21 +77,8 @@ class LoginViewController: UIViewController {
         
         if (isSignedIn) {
             
-            /*
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let mainTabBarController = storyboard.instantiateViewController(identifier: "MainTabBarController")
-                
-            // This is to get the SceneDelegate object from  view controller
-            // then call the change root view controller function to change to main tab bar
-            (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(mainTabBarController)
-             */
-            //let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let nextViewController = self.storyboard?.instantiateViewController(withIdentifier: "MainTabBarController") as! UITabBarController
-           
-            print("nextViewController: \(nextViewController)")
             self.navigationController?.pushViewController(nextViewController, animated: true)
-           
-            
             
         }
     }
