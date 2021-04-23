@@ -14,7 +14,6 @@ extension  UIViewController {
     // MARK: - signOutTapped
     @IBAction func signOutTapped(_ sender: Any) {
         
-        
         do {
             
             try Auth.auth().signOut()
@@ -23,15 +22,10 @@ extension  UIViewController {
             if let vcB = parentNav?.viewControllers.first(where: { $0 is LoginViewController }) {
                 parentNav?.popToViewController(vcB, animated: false)
             }
-
             
         } catch {
             print("unable to sign out: \(error)")
         }
-        
-    
-        //self.view.window?.rootViewController?.dismiss(animated: true, completion: nil)
-        
         
     }
     

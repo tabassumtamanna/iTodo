@@ -8,9 +8,10 @@
 import UIKit
 import Firebase
 
+// MARK: - TodoArchiveViewController
 class TodoArchiveViewController: UIViewController {
 
-    
+    // MARK: - Outlets
     @IBOutlet weak var taskArchiveTableView: UITableView!
     
     // MARK: - Properties
@@ -33,10 +34,8 @@ class TodoArchiveViewController: UIViewController {
         self.displayName = String(Auth.auth().currentUser?.displayName ?? "")
        
     }
-    
-    
-    
-    // MARK: - Config
+        
+    // MARK: - configure Database
     
     func configureDatabase() {
         
@@ -66,7 +65,7 @@ class TodoArchiveViewController: UIViewController {
     
 }
 
-
+// MARK: - TodoArchiveViewController:  UITableViewDataSource, UITableViewDelegate
 extension TodoArchiveViewController:  UITableViewDataSource, UITableViewDelegate {
     // MARK: - Number Of Rows In Section
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

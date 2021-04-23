@@ -8,7 +8,7 @@
 import UIKit
 import Firebase
 
-
+// MARK: - TodoListViewController
 class TodoListViewController: UIViewController {
 
     
@@ -17,7 +17,6 @@ class TodoListViewController: UIViewController {
     @IBOutlet weak var addTaskButton: UIButton!
     @IBOutlet weak var taskTableView: UITableView!
    
-    
     
     // MARK: - Properties
     var ref: DatabaseReference!
@@ -36,7 +35,7 @@ class TodoListViewController: UIViewController {
         self.taskTextField.text = ""
         
         self.tabBarController?.navigationItem.hidesBackButton = true
-        print("viewDidLoad:: List")
+        
         configureDatabase()
         
        // self.displayName.title = String(Auth.auth().currentUser?.email?.components(separatedBy: "@")[0] ?? "")
@@ -45,8 +44,7 @@ class TodoListViewController: UIViewController {
     
     
    
-    // MARK: - Actions
-    
+    // MARK: - Actions Add Task Tapped
     @IBAction func addTaskTapped(_ sender: Any) {
         let _ = textFieldShouldReturn(taskTextField)
         self.taskTextField.text = ""
@@ -54,15 +52,14 @@ class TodoListViewController: UIViewController {
     
     
    
-    // MARK: - Config
-    
+    // MARK: - configure Database
     func configureDatabase() {
-        print("configureDatabase: List")
+        
         self.ref = Database.database().reference()
         
         //let currentDate = getFormattedDate(date: Date(), format: "yyyy-MM-dd HH:mm:ss")
         let userID : String = (Auth.auth().currentUser?.uid)!
-        print("userID: \(userID)")
+        
         let yesterday = Calendar.current.date(byAdding: .day, value: -1, to: Date())!
         let endDate = getFormattedDate(date: yesterday, format: "yyyy-MM-dd HH:mm:ss")
         
@@ -78,13 +75,13 @@ class TodoListViewController: UIViewController {
        
     }
     
+    // MARK: - Deinit
     deinit {
         self.ref.child("Tasks").removeObserver(withHandle: _refHandle)
     }
     
 
     // MARK: - Add Task
-    
     func addTask(data: [String:String]){
         
         var mdata = data
@@ -137,7 +134,9 @@ class TodoListViewController: UIViewController {
     
 }
 
+// MARK: - TodoListViewController:  UITableViewDataSource, UITableViewDelegate
 extension TodoListViewController:  UITableViewDataSource, UITableViewDelegate {
+    
     // MARK: - Number Of Rows In Section
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         

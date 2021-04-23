@@ -28,15 +28,13 @@ class LoginViewController: UIViewController {
     }
     
 
-    // MARK: -  Actions
-    
+    // MARK: -  Show Login View
     @IBAction func showLoginView(_ sender: Any) {
         loginSession()
     }
     
     
-    // MARK: Config
-    
+    // MARK: - Configure Auth
     func configureAuth() {
         
         let provider: [FUIAuthProvider] = [FUIGoogleAuth(), FUIEmailAuth()]
@@ -63,12 +61,13 @@ class LoginViewController: UIViewController {
         }
     }
     
+    // MARK: - Deinit
     deinit {
         
         Auth.auth().removeStateDidChangeListener(_authHandle)
     }
     
-    // MARK: - Sign In and Out
+    // MARK: - Signed In Status
     
     func signedInStatus(isSignedIn: Bool) {
         
@@ -83,7 +82,7 @@ class LoginViewController: UIViewController {
         }
     }
     
-    
+    // MARK: - Login Session
     func loginSession() {
         let authViewController = FUIAuth.defaultAuthUI()!.authViewController()
         self.present(authViewController, animated: true, completion: nil)
