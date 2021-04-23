@@ -71,7 +71,7 @@ class TodoListViewController: UIViewController {
                 self.taskList.append(snapshot)
                 self.taskTableView.insertRows(at: [IndexPath(row: self.taskList.count - 1, section: 0)], with: .automatic)
             }
-        }
+        } 
        
     }
     

@@ -25,6 +25,7 @@ extension  UIViewController {
             
         } catch {
             print("unable to sign out: \(error)")
+            showFailureMessage(title: "SignOut Failure!", message: "Unable to sign out.")
         }
         
     }

@@ -71,7 +71,7 @@ class LoginViewController: UIViewController {
     
     func signedInStatus(isSignedIn: Bool) {
         
-        print("signedInStatus: \(isSignedIn)")
+
         self.signInButton.isHidden = isSignedIn
         
         if (isSignedIn) {
