@@ -86,12 +86,7 @@ class TodoListViewController: UIViewController {
             self.taskTableView.insertRows(at: [IndexPath(row: self.taskList.count - 1, section: 0)], with: .automatic)
         }
     }
-    
-   /*
-    deinit {
-        self.ref.child("Tasks").removeObserver(withHandle: _refHandle)
-    }
-    */
+  
 
     // MARK: - Add Task
     func addTask(taskTitle: String){
@@ -126,21 +121,21 @@ class TodoListViewController: UIViewController {
         
         task[Tasks.status] = status ? "1" : "0"
         
-        if status {
-            task[Tasks.taskCompleted] = getFormattedDate(date: Date(), format: "yyyy-MM-dd HH:mm:ss")
-        } else {
-            task[Tasks.taskCompleted] = ""
-        }
+        let taskCompleted = status ? getFormattedDate(date: Date(), format: "yyyy-MM-dd HH:mm:ss") : ""
+        
+        
+        TodoListUser.updateTask(status: status, taskCompleted: taskCompleted, key: key, completion: handleUpdateTask(status:error:))
     
-        self.ref.child("Tasks").child(key).updateChildValues(task){ (error:Error?, ref:DatabaseReference) in
-            
-            if let error = error {
-                print("Task could not be updated: \(error).")
-                self.showFailureMessage(title: "Task Not Updated", message: "\(error.localizedDescription)")
-            }
-            else {
-                print("Task updated successfully!")
-            }
+       
+    }
+    
+    func handleUpdateTask(status: Bool, error: Error?){
+        
+        if let error = error {
+            print("Task could not be updated: \(error).")
+            self.showFailureMessage(title: "Task Not Updated", message: "\(error.localizedDescription)")
+        } else {
+            print("Task updated successfully!")
         }
     }
     

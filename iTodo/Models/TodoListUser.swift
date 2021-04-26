@@ -75,8 +75,22 @@ class TodoListUser {
                 completion(true, nil)
             }
         }
+    }
+    
+    class func updateTask(status: Bool, taskCompleted: String, key: String, completion: @escaping (Bool, Error?) -> Void){
         
+        let task = ["status": status ? "1" : "0",
+                    "taskCompleted": taskCompleted]
         
+        TodoAuth.ref.child(TodoList.tableName).child(key).updateChildValues(task){ (error:Error?, ref:DatabaseReference) in
+            
+            if let error = error {
+                completion(false, error)
+            }
+            else {
+                completion(true, nil)
+            }
+        }
     }
     
     // MARK: - Deinit

@@ -63,11 +63,12 @@ class LoginViewController: UIViewController {
         TodoListUser.login(completion:signedInStatus(isSignedIn:))
     }
     
-    // MARK: - Deinit
+    /*
     deinit {
         
         Auth.auth().removeStateDidChangeListener(_authHandle)
     }
+ */
     
     // MARK: - Signed In Status
     
