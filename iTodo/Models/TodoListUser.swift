@@ -58,7 +58,7 @@ class TodoListUser {
         }
     }
     
-    class func addTask(taskTitle: String, taskCreated: String, completion: @escaping (Bool, Error?) -> Void) {
+    class func addTask(taskTitle: String, taskCreated: String, completion: @escaping (String, Bool, Error?) -> Void) {
         
         let userId = TodoAuth.user?.uid
         
@@ -70,14 +70,14 @@ class TodoListUser {
         
         TodoAuth.ref.child(TodoList.tableName).childByAutoId().setValue(task) { (error:Error?, ref:DatabaseReference) in
             if let error = error {
-                completion(false, error)
+                completion("added", false, error)
             } else {
-                completion(true, nil)
+                completion("added", true, nil)
             }
         }
     }
     
-    class func updateTask(status: Bool, taskCompleted: String, key: String, completion: @escaping (Bool, Error?) -> Void){
+    class func updateTask(status: Bool, taskCompleted: String, key: String, completion: @escaping (String, Bool, Error?) -> Void){
         
         let task = ["status": status ? "1" : "0",
                     "taskCompleted": taskCompleted]
@@ -85,10 +85,21 @@ class TodoListUser {
         TodoAuth.ref.child(TodoList.tableName).child(key).updateChildValues(task){ (error:Error?, ref:DatabaseReference) in
             
             if let error = error {
-                completion(false, error)
+                completion("updated", false, error)
             }
             else {
-                completion(true, nil)
+                completion("updated", true, nil)
+            }
+        }
+    }
+    
+    class func deleteTask(key: String, completion: @escaping (String, Bool, Error?) -> Void){
+        
+        TodoAuth.ref.child(TodoList.tableName).child(key).removeValue() { error, arr  in
+            if error != nil {
+                completion("deleted", true, nil)
+            } else {
+                completion("deleted", false, error)
             }
         }
     }

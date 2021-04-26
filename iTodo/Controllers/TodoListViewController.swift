@@ -57,20 +57,6 @@ class TodoListViewController: UIViewController {
         
         TodoListUser.getTaskList(completion: handleTaskList(taskSnapshot:))
         
-        /*
-        _refHandle = ref.child("Tasks").queryOrdered(byChild: "userId").queryStarting(atValue: userID).queryEnding(atValue: userID).observe(.childAdded) { ( snapshot: DataSnapshot) in
-            
-            let task = snapshot.value as! [String: String]
-            
-            if let taskCreated = task[Tasks.taskCreated], taskCreated >= endDate {
-        
-                self.taskList.append(snapshot)
-                self.taskTableView.insertRows(at: [IndexPath(row: self.taskList.count - 1, section: 0)], with: .automatic)
-            }
-        }
-        */
-        
-      
     }
     
     func handleTaskList(taskSnapshot: DataSnapshot){
@@ -96,20 +82,9 @@ class TodoListViewController: UIViewController {
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
         let taskCreated = dateFormatter.string(from: date)
         
-        TodoListUser.addTask(taskTitle: taskTitle, taskCreated: taskCreated, completion: handleAddTask(status:error:))
+        TodoListUser.addTask(taskTitle: taskTitle, taskCreated: taskCreated, completion: handleTask(handleType:status:error:))
         
     }
-    
-    func handleAddTask(status: Bool, error: Error?){
-        
-        if let error = error {
-            print("Task could not be saved: \(error).")
-            self.showFailureMessage(title: "Task Not Saved", message: "\(error.localizedDescription)")
-        } else {
-            print("Task saved successfully!")
-        }
-    }
-    
     
     // MARK:- Update Task
     func updateTaskStatus(at indexPath: IndexPath, status: Bool){
@@ -124,20 +99,9 @@ class TodoListViewController: UIViewController {
         let taskCompleted = status ? getFormattedDate(date: Date(), format: "yyyy-MM-dd HH:mm:ss") : ""
         
         
-        TodoListUser.updateTask(status: status, taskCompleted: taskCompleted, key: key, completion: handleUpdateTask(status:error:))
-    
-       
+        TodoListUser.updateTask(status: status, taskCompleted: taskCompleted, key: key, completion: handleTask(handleType:status:error:))
     }
-    
-    func handleUpdateTask(status: Bool, error: Error?){
-        
-        if let error = error {
-            print("Task could not be updated: \(error).")
-            self.showFailureMessage(title: "Task Not Updated", message: "\(error.localizedDescription)")
-        } else {
-            print("Task updated successfully!")
-        }
-    }
+
     
     // MARK:- Delete Task
     func deleteTask(at indexPath: IndexPath){
@@ -145,11 +109,17 @@ class TodoListViewController: UIViewController {
         let taskSnapshot: DataSnapshot! = taskList[indexPath.row]
         let key = taskSnapshot.key
         
-        self.ref.child("Tasks").child(key).removeValue() { error, arr  in
-            if error != nil {
-                print("error \(error?.localizedDescription ?? "")")
-                self.showFailureMessage(title: "Task Not Deleted", message: (error?.localizedDescription) ?? "")
-            }
+        TodoListUser.deleteTask(key: key, completion: handleTask(handleType:status:error:))
+        
+    }
+    
+    func handleTask(handleType: String, status: Bool, error: Error?){
+        
+        if let error = error {
+            print("Task could not be \(handleType): \(error).")
+            self.showFailureMessage(title: "Task Not \(handleType)", message: "\(error.localizedDescription)")
+        } else {
+            print("Task \(handleType) successfully!")
         }
     }
     
