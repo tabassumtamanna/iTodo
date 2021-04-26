@@ -37,7 +37,7 @@ class LoginViewController: UIViewController {
     // MARK: - Configure Auth
     func configureAuth() {
         
-        let provider: [FUIAuthProvider] = [FUIGoogleAuth(), FUIEmailAuth()]
+        /*let provider: [FUIAuthProvider] = [FUIGoogleAuth(), FUIEmailAuth()]
         FUIAuth.defaultAuthUI()?.providers = provider
         
         // listen for changes in the authorization state
@@ -58,7 +58,9 @@ class LoginViewController: UIViewController {
                 self.signedInStatus(isSignedIn: false)
                 self.loginSession()
             }
-        }
+        }*/
+        
+        TodoListUser.login(completion:signedInStatus(isSignedIn:))
     }
     
     // MARK: - Deinit
@@ -79,6 +81,8 @@ class LoginViewController: UIViewController {
             let nextViewController = self.storyboard?.instantiateViewController(withIdentifier: "MainTabBarController") as! UITabBarController
             self.navigationController?.pushViewController(nextViewController, animated: true)
             
+        } else {
+            self.loginSession()
         }
     }
     

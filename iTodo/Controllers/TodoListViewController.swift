@@ -55,47 +55,64 @@ class TodoListViewController: UIViewController {
     // MARK: - configure Database
     func configureDatabase() {
         
-        self.ref = Database.database().reference()
+        TodoListUser.getTaskList(completion: handleTaskList(taskSnapshot:))
         
-        //let currentDate = getFormattedDate(date: Date(), format: "yyyy-MM-dd HH:mm:ss")
-        let userID : String = (Auth.auth().currentUser?.uid)!
-        
-        let yesterday = Calendar.current.date(byAdding: .day, value: -1, to: Date())!
-        let endDate = getFormattedDate(date: yesterday, format: "yyyy-MM-dd HH:mm:ss")
-        
-        _refHandle = ref.child("Tasks").queryOrdered(byChild: "userId").queryStarting(atValue: userID).queryEnding(atValue: userID).observe(.childAdded){ (snapshot: DataSnapshot) in
+        /*
+        _refHandle = ref.child("Tasks").queryOrdered(byChild: "userId").queryStarting(atValue: userID).queryEnding(atValue: userID).observe(.childAdded) { ( snapshot: DataSnapshot) in
             
             let task = snapshot.value as! [String: String]
+            
             if let taskCreated = task[Tasks.taskCreated], taskCreated >= endDate {
         
                 self.taskList.append(snapshot)
                 self.taskTableView.insertRows(at: [IndexPath(row: self.taskList.count - 1, section: 0)], with: .automatic)
             }
-        } 
-       
+        }
+        */
+        
+      
     }
     
-    // MARK: - Deinit
+    func handleTaskList(taskSnapshot: DataSnapshot){
+       
+        let yesterday = Calendar.current.date(byAdding: .day, value: -1, to: Date())!
+        let endDate = getFormattedDate(date: yesterday, format: "yyyy-MM-dd HH:mm:ss")
+        
+        let task = taskSnapshot.value as! [String: String]
+        
+        if let taskCreated = task[Tasks.taskCreated], taskCreated >= endDate {
+    
+            self.taskList.append(taskSnapshot)
+            self.taskTableView.insertRows(at: [IndexPath(row: self.taskList.count - 1, section: 0)], with: .automatic)
+        }
+    }
+    
+   /*
     deinit {
         self.ref.child("Tasks").removeObserver(withHandle: _refHandle)
     }
-    
+    */
 
     // MARK: - Add Task
-    func addTask(data: [String:String]){
-        
-        var mdata = data
-        mdata[Tasks.status] = "0"
+    func addTask(taskTitle: String){
         
         let date = Date()
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-        mdata[Tasks.taskCreated] = dateFormatter.string(from: date)
-        mdata[Tasks.taskCompleted] = ""
-        mdata[Tasks.userId] = Auth.auth().currentUser?.uid
+        let taskCreated = dateFormatter.string(from: date)
         
-        self.ref.child("Tasks").childByAutoId().setValue(mdata)
+        TodoListUser.addTask(taskTitle: taskTitle, taskCreated: taskCreated, completion: handleAddTask(status:error:))
         
+    }
+    
+    func handleAddTask(status: Bool, error: Error?){
+        
+        if let error = error {
+            print("Task could not be saved: \(error).")
+            self.showFailureMessage(title: "Task Not Saved", message: "\(error.localizedDescription)")
+        } else {
+            print("Task saved successfully!")
+        }
     }
     
     
@@ -115,7 +132,16 @@ class TodoListViewController: UIViewController {
             task[Tasks.taskCompleted] = ""
         }
     
-        self.ref.child("Tasks").child(key).updateChildValues(task)
+        self.ref.child("Tasks").child(key).updateChildValues(task){ (error:Error?, ref:DatabaseReference) in
+            
+            if let error = error {
+                print("Task could not be updated: \(error).")
+                self.showFailureMessage(title: "Task Not Updated", message: "\(error.localizedDescription)")
+            }
+            else {
+                print("Task updated successfully!")
+            }
+        }
     }
     
     // MARK:- Delete Task
@@ -127,6 +153,7 @@ class TodoListViewController: UIViewController {
         self.ref.child("Tasks").child(key).removeValue() { error, arr  in
             if error != nil {
                 print("error \(error?.localizedDescription ?? "")")
+                self.showFailureMessage(title: "Task Not Deleted", message: (error?.localizedDescription) ?? "")
             }
         }
     }
@@ -206,8 +233,7 @@ extension TodoListViewController: UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if !textField.text!.isEmpty {
-            let data = ["task": textField.text! as String]
-            addTask(data: data)
+            addTask(taskTitle: textField.text!)
             textField.resignFirstResponder()
             textField.text = ""
         }

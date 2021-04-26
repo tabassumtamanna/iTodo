@@ -23,9 +23,9 @@ extension  UIViewController {
                 parentNav?.popToViewController(vcB, animated: false)
             }
             
-        } catch {
-            print("unable to sign out: \(error)")
-            showFailureMessage(title: "SignOut Failure!", message: "Unable to sign out.")
+        } catch let signOutError as NSError {
+            print ("Error signing out: %@", signOutError)
+            showFailureMessage(title: "SignOut Failure!", message: signOutError as! String)
         }
         
     }
