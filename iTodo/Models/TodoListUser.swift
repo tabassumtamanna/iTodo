@@ -10,6 +10,7 @@ import Firebase
 import FirebaseUI
 import GoogleSignIn
 
+// MARK: - TodoListUser
 class TodoListUser {
     
     struct TodoAuth {
@@ -25,7 +26,9 @@ class TodoListUser {
         
     }
     
+    // MARK: - login
     class func login(completion: @escaping (Bool) -> Void) {
+        
         let provider: [FUIAuthProvider] = [FUIGoogleAuth(), FUIEmailAuth()]
         FUIAuth.defaultAuthUI()?.providers = provider
         
@@ -45,6 +48,7 @@ class TodoListUser {
         
     }
     
+    // MARK: - Get Task List
     class func getTaskList(completion: @escaping (DataSnapshot) -> Void) {
         TodoAuth.ref = Database.database().reference()
         
@@ -58,6 +62,7 @@ class TodoListUser {
         }
     }
     
+    // MARK: - Add Task
     class func addTask(taskTitle: String, taskCreated: String, completion: @escaping (String, Bool, Error?) -> Void) {
         
         let userId = TodoAuth.user?.uid
@@ -77,6 +82,7 @@ class TodoListUser {
         }
     }
     
+    // MARK: - Update Task
     class func updateTask(status: Bool, taskCompleted: String, key: String, completion: @escaping (String, Bool, Error?) -> Void){
         
         let task = ["status": status ? "1" : "0",
@@ -93,6 +99,7 @@ class TodoListUser {
         }
     }
     
+    // MARK: - Delete Task
     class func deleteTask(key: String, completion: @escaping (String, Bool, Error?) -> Void){
         
         TodoAuth.ref.child(TodoList.tableName).child(key).removeValue() { error, arr  in

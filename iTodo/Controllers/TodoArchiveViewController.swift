@@ -15,17 +15,10 @@ class TodoArchiveViewController: UIViewController {
     @IBOutlet weak var taskArchiveTableView: UITableView!
     
     // MARK: - Properties
-    var ref: DatabaseReference!
-    //var taskList: [DataSnapshot] = []
-   
-    var displayName = ""
-    fileprivate var _refHandle: DatabaseHandle!
+    var taskList: [Task] = []
+    var sections = [GroupedSection<Date, Task>]()
     
-    
-    var taskListGroup: [FireTask] = []
-    var sections = [GroupedSection<Date, FireTask>]()
-    
-    // MARK: - GroupedS ection
+    // MARK: - Grouped Section
     struct GroupedSection<SectionItem : Hashable, RowItem>{
         
         var sectionItem : SectionItem
@@ -45,16 +38,54 @@ class TodoArchiveViewController: UIViewController {
         self.taskArchiveTableView.delegate = self
         self.taskArchiveTableView.dataSource = self
        
-        configureDatabase()
-        
-        self.displayName = String(Auth.auth().currentUser?.displayName ?? "")
-        
+        getArchiveTaskList()
         
     }
     
-    func getDateFromString(_ date: String)  ->  Date  {
-       
+    // MARK: - Get Grouped Task List
+    fileprivate func getGroupedTaskList(_ taskSnapshot: DataSnapshot){
         
+        let taskFire = taskSnapshot.value as! [String: String]
+        
+        let taskTitle = taskFire[TodoList.taskTitle] ?? ""
+        let status = taskFire[TodoList.status] ?? ""
+        let taskCreated = taskFire[TodoList.taskCreated] ?? ""
+        let taskCompleted = taskFire[TodoList.taskCompleted] ?? ""
+        let userId = taskFire[TodoList.userId] ?? ""
+        
+        self.taskList.append(Task(taskTitle: taskTitle, status: status, taskCreated: taskCreated, taskCompleted: taskCompleted, userId: userId))
+           
+        
+        self.sections = GroupedSection.group(rows: self.taskList, by: {getTaskSectionName($0.taskCreated)})
+        self.sections.sort { (lhs, rhs) in lhs.sectionItem > rhs.sectionItem}
+        
+        self.taskArchiveTableView.reloadData()
+        
+    }
+        
+    // MARK: - Get Archive Task List
+    func getArchiveTaskList() {
+        
+        TodoListUser.getTaskList(completion: handleArchiveTaskList(taskSnapshot:))
+    }
+    
+    // MARK: -  Handle Task List
+    func handleArchiveTaskList(taskSnapshot: DataSnapshot){
+       
+        let yesterday = Calendar.current.date(byAdding: .day, value: -1, to: Date())!
+        let endDate = getFormattedDate(date: yesterday, format: "yyyy-MM-dd HH:mm:ss")
+        
+        let task = taskSnapshot.value as! [String: String]
+        
+        if let taskCreated = task[TodoList.taskCreated], taskCreated < endDate {
+    
+            self.getGroupedTaskList(taskSnapshot)
+        }
+    }
+    
+    // MARK: - Get Task Section Name
+    func getTaskSectionName(_ date: String)  ->  Date  {
+       
         let dateformat = DateFormatter()
         dateformat.dateFormat = "yyyy-MM-dd HH:mm:ss"
         let date = dateformat.date(from: date)
@@ -63,48 +94,6 @@ class TodoArchiveViewController: UIViewController {
         let components = calendar.dateComponents([.year, .month, .day], from: date!)
         return calendar.date(from: components)!
         
-    }
-    
-    fileprivate func getTaskList(_ taskSnapshot: DataSnapshot){
-        
-        let taskFire = taskSnapshot.value as! [String: String]
-        
-        let taskTitle = taskFire[Tasks.taskTitle] ?? ""
-        let status = taskFire[Tasks.status] ?? ""
-        let taskCreated = taskFire[Tasks.taskCreated] ?? ""
-        let taskCompleted = taskFire[Tasks.taskCompleted] ?? ""
-        let userId = taskFire[Tasks.userId] ?? ""
-        
-        self.taskListGroup.append(FireTask(task: taskTitle, status: status, taskCreated: taskCreated, taskCompleted: taskCompleted, userId: userId))
-           
-        
-        self.sections = GroupedSection.group(rows: self.taskListGroup, by: {getDateFromString($0.taskCreated)})
-        self.sections.sort { (lhs, rhs) in lhs.sectionItem > rhs.sectionItem}
-        
-        self.taskArchiveTableView.reloadData()
-        
-    }
-    
-   
-        
-    // MARK: - configure Database
-    
-    func configureDatabase() {
-        
-        TodoListUser.getTaskList(completion: handleTaskList(taskSnapshot:))
-    }
-    
-    func handleTaskList(taskSnapshot: DataSnapshot){
-       
-        let yesterday = Calendar.current.date(byAdding: .day, value: -1, to: Date())!
-        let endDate = getFormattedDate(date: yesterday, format: "yyyy-MM-dd HH:mm:ss")
-        
-        let task = taskSnapshot.value as! [String: String]
-        
-        if let taskCreated = task[Tasks.taskCreated], taskCreated < endDate {
-    
-            self.getTaskList(taskSnapshot)
-        }
     }
     
     
@@ -145,7 +134,7 @@ extension TodoArchiveViewController:  UITableViewDataSource, UITableViewDelegate
         let section = self.sections[indexPath.section]
         let task = section.rowItem[indexPath.row]
         
-        cell.textLabel?.text = task.task
+        cell.textLabel?.text = task.taskTitle
         cell.textLabel?.textColor =  task.status == "1" ? .gray : .black
         
         if task.taskCompleted != "" {

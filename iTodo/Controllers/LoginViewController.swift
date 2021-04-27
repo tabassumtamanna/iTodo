@@ -8,7 +8,7 @@
 import UIKit
 import Firebase
 import FirebaseUI
-import GoogleSignIn
+
 
 // MARK: - LoginViewController
 class LoginViewController: UIViewController {
@@ -36,42 +36,11 @@ class LoginViewController: UIViewController {
     
     // MARK: - Configure Auth
     func configureAuth() {
-        
-        /*let provider: [FUIAuthProvider] = [FUIGoogleAuth(), FUIEmailAuth()]
-        FUIAuth.defaultAuthUI()?.providers = provider
-        
-        // listen for changes in the authorization state
-        _authHandle = Auth.auth().addStateDidChangeListener { (auth: Auth, user: User?) in
-            
-            // check if there is a current user
-            if let activeUser = user {
-                
-                // check if the current app user is the current FIRUser
-                if self.user != activeUser {
-                    self.user = activeUser
-                    self.signedInStatus(isSignedIn: true)
-                    //let name = user!.email!.components(separatedBy: "@")[0]
-                    
-                }
-            } else {
-                // user must sign in
-                self.signedInStatus(isSignedIn: false)
-                self.loginSession()
-            }
-        }*/
-        
         TodoListUser.login(completion:signedInStatus(isSignedIn:))
     }
     
-    /*
-    deinit {
-        
-        Auth.auth().removeStateDidChangeListener(_authHandle)
-    }
- */
     
     // MARK: - Signed In Status
-    
     func signedInStatus(isSignedIn: Bool) {
         
 
@@ -92,4 +61,5 @@ class LoginViewController: UIViewController {
         let authViewController = FUIAuth.defaultAuthUI()!.authViewController()
         self.present(authViewController, animated: true, completion: nil)
     }
+    
 }

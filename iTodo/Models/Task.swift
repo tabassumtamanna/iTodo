@@ -7,8 +7,8 @@
 
 import Foundation
 
-struct FireTask: Codable {
-    let task: String
+struct Task: Codable {
+    let taskTitle: String
     let status: String
     let taskCreated: String
     let taskCompleted: String

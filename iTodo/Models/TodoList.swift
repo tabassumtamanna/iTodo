@@ -7,8 +7,8 @@
 
 import Foundation
 
-// MARK: -  Tasks
-struct Tasks {
+// MARK: -  TodoList
+struct TodoList {
     static let taskTitle        = "taskTitle"
     static let status           = "status"
     static let taskCreated      = "taskCreated"
@@ -16,6 +16,3 @@ struct Tasks {
     static let userId           = "userId"
     
 }
-
-
-

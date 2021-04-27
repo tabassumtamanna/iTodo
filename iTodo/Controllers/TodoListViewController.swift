@@ -19,11 +19,8 @@ class TodoListViewController: UIViewController {
    
     
     // MARK: - Properties
-    var ref: DatabaseReference!
     var taskList: [DataSnapshot]! = []
-    
-    fileprivate var _refHandle: DatabaseHandle!
-    
+   
     
     // MARK: - View Did Load
     override func viewDidLoad() {
@@ -36,13 +33,9 @@ class TodoListViewController: UIViewController {
         
         self.tabBarController?.navigationItem.hidesBackButton = true
         
-        configureDatabase()
-        
-       // self.displayName.title = String(Auth.auth().currentUser?.email?.components(separatedBy: "@")[0] ?? "")
+        getTodayTaskList()
        
     }
-    
-    
    
     // MARK: - Actions Add Task Tapped
     @IBAction func addTaskTapped(_ sender: Any) {
@@ -51,14 +44,14 @@ class TodoListViewController: UIViewController {
     }
     
     
-   
-    // MARK: - configure Database
-    func configureDatabase() {
+    // MARK: - Get Today Task List
+    func getTodayTaskList() {
         
         TodoListUser.getTaskList(completion: handleTaskList(taskSnapshot:))
         
     }
     
+    // MARK:- Handle Task List
     func handleTaskList(taskSnapshot: DataSnapshot){
        
         let yesterday = Calendar.current.date(byAdding: .day, value: -1, to: Date())!
@@ -66,7 +59,7 @@ class TodoListViewController: UIViewController {
         
         let task = taskSnapshot.value as! [String: String]
         
-        if let taskCreated = task[Tasks.taskCreated], taskCreated >= endDate {
+        if let taskCreated = task[TodoList.taskCreated], taskCreated >= endDate {
     
             self.taskList.append(taskSnapshot)
             self.taskTableView.insertRows(at: [IndexPath(row: self.taskList.count - 1, section: 0)], with: .automatic)
@@ -94,7 +87,7 @@ class TodoListViewController: UIViewController {
         
         var task: [String: String] = [:]
         
-        task[Tasks.status] = status ? "1" : "0"
+        task[TodoList.status] = status ? "1" : "0"
         
         let taskCompleted = status ? getFormattedDate(date: Date(), format: "yyyy-MM-dd HH:mm:ss") : ""
         
@@ -113,6 +106,7 @@ class TodoListViewController: UIViewController {
         
     }
     
+    // MARK:- Handle Task
     func handleTask(handleType: String, status: Bool, error: Error?){
         
         if let error = error {
@@ -142,7 +136,7 @@ extension TodoListViewController:  UITableViewDataSource, UITableViewDelegate {
        
         let taskSnapshot: DataSnapshot! = taskList[indexPath.row]
         let task = taskSnapshot.value as! [String: String]
-        let status = task[Tasks.status]
+        let status = task[TodoList.status]
         
         if status == "1" {
             cell.checkboxImage.image = UIImage(named: "checked")
@@ -152,7 +146,7 @@ extension TodoListViewController:  UITableViewDataSource, UITableViewDelegate {
             cell.taskLabel.textColor = .black
         }
         
-        cell.taskLabel.text = task[Tasks.taskTitle]
+        cell.taskLabel.text = task[TodoList.taskTitle]
         
         return cell
     }
@@ -196,6 +190,7 @@ extension TodoListViewController:  UITableViewDataSource, UITableViewDelegate {
 // MARK: - TodoListViewController: UITextFieldDelegate
 extension TodoListViewController: UITextFieldDelegate {
     
+    // MARK: - TextField Should Return
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if !textField.text!.isEmpty {
             addTask(taskTitle: textField.text!)
