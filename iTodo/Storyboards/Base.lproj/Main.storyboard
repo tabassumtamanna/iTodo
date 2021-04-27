@@ -32,10 +32,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5hv-V1-Dx9">
-                                <rect key="frame" x="116" y="422" width="183" height="52"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5hv-V1-Dx9">
+                                <rect key="frame" x="114" y="440" width="191" height="52"/>
                                 <color key="backgroundColor" red="0.067763365810000004" green="0.69789862629999999" blue="0.89414525030000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="52" id="7tD-Sp-Zhk"/>
+                                </constraints>
                                 <state key="normal" title="SIGN IN">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
@@ -43,17 +45,21 @@
                                     <action selector="showLoginView:" destination="Fsr-34-qeW" eventType="touchUpInside" id="iAp-h7-VDo"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Todo List" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7g5-10-Un6">
-                                <rect key="frame" x="116" y="170" width="183" height="50"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <color key="textColor" red="0.067763365810000004" green="0.69789862629999999" blue="0.89414525030000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iTodo" translatesAutoresizingMaskIntoConstraints="NO" id="Cfo-vM-BL3">
+                                <rect key="frame" x="89" y="168" width="236" height="222"/>
+                            </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="0Xs-Fv-gce"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="0Xs-Fv-gce" firstAttribute="trailing" secondItem="Cfo-vM-BL3" secondAttribute="trailing" constant="89" id="IoB-GZ-O9L"/>
+                            <constraint firstItem="Cfo-vM-BL3" firstAttribute="leading" secondItem="0Xs-Fv-gce" secondAttribute="leading" constant="89" id="PID-DG-X3S"/>
+                            <constraint firstItem="5hv-V1-Dx9" firstAttribute="top" secondItem="Cfo-vM-BL3" secondAttribute="bottom" constant="50" id="aSw-43-NDn"/>
+                            <constraint firstItem="5hv-V1-Dx9" firstAttribute="leading" secondItem="0Xs-Fv-gce" secondAttribute="leading" constant="114" id="lZP-Ol-4Cy"/>
+                            <constraint firstItem="0Xs-Fv-gce" firstAttribute="bottom" secondItem="5hv-V1-Dx9" secondAttribute="bottom" constant="370" id="r5f-jh-CWG"/>
+                            <constraint firstItem="Cfo-vM-BL3" firstAttribute="top" secondItem="0Xs-Fv-gce" secondAttribute="top" constant="80" id="xif-i5-0OT"/>
+                            <constraint firstItem="0Xs-Fv-gce" firstAttribute="trailing" secondItem="5hv-V1-Dx9" secondAttribute="trailing" constant="109" id="y8H-I5-7BT"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="vah-Cl-Thf"/>
                     <connections>
@@ -62,7 +68,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lFL-Lg-sPp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-3183" y="-6"/>
+            <point key="canvasLocation" x="-3184.057971014493" y="-6.0267857142857144"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="3CZ-SW-GTi">
@@ -115,7 +121,7 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="e1p-gf-0PK" userLabel="Add Task Stack View">
                                         <rect key="frame" x="0.0" y="0.0" width="394" height="45"/>
                                         <subviews>
-                                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Add your new todo" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fcR-Hx-odD">
+                                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Add your new task" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fcR-Hx-odD">
                                                 <rect key="frame" x="0.0" y="0.0" width="356" height="45"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="45" id="sBd-II-GZq"/>
@@ -298,6 +304,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="iTodo" width="1280" height="1280"/>
         <image name="list.bullet.rectangle" catalog="system" width="128" height="93"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
