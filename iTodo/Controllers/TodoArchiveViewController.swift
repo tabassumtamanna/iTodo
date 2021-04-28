@@ -13,6 +13,8 @@ class TodoArchiveViewController: UIViewController {
 
     // MARK: - Outlets
     @IBOutlet weak var taskArchiveTableView: UITableView!
+    @IBOutlet weak var profilePicBarButton: UIBarButtonItem!
+    
     
     // MARK: - Properties
     var taskList: [Task] = []
@@ -38,6 +40,7 @@ class TodoArchiveViewController: UIViewController {
         self.taskArchiveTableView.delegate = self
         self.taskArchiveTableView.dataSource = self
        
+        getProfilePic()
         getArchiveTaskList()
         
     }
@@ -61,6 +64,24 @@ class TodoArchiveViewController: UIViewController {
         
         self.taskArchiveTableView.reloadData()
         
+    }
+    
+    // MARK: - Get Profile Picture
+    func getProfilePic(){
+        
+        if let photoUrl = TodoListUser.TodoAuth.user?.photoURL {
+            
+            let imageData = try? Data(contentsOf: photoUrl)
+            
+            if let imageData = imageData {
+                
+                self.profilePicBarButton.accessibilityFrame = CGRect(x: 0, y: 0, width: 30, height: 30)
+               
+                let image =  UIImage(data: imageData)?.resizeImage(to: self.profilePicBarButton.accessibilityFrame.size)
+                self.profilePicBarButton.setBackgroundImage(image, for : UIControl.State.normal, barMetrics: UIBarMetrics.default)
+            }
+        }
+
     }
         
     // MARK: - Get Archive Task List

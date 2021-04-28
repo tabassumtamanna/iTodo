@@ -8,6 +8,7 @@
 import UIKit
 import Firebase
 
+// MARK: - Extension : UIViewController
 extension  UIViewController {
 
     
@@ -46,3 +47,11 @@ extension  UIViewController {
     }
 
 }
+
+// MARK: - Extension: UIImage
+extension UIImage {
+    func resizeImage(to size: CGSize) -> UIImage {
+       return UIGraphicsImageRenderer(size: size).image { _ in
+           draw(in: CGRect(origin: .zero, size: size))
+    }
+}}

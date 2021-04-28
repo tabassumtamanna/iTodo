@@ -17,6 +17,7 @@ class TodoListViewController: UIViewController {
     @IBOutlet weak var addTaskButton: UIButton!
     @IBOutlet weak var taskTableView: UITableView!
    
+    @IBOutlet weak var profilePicBarButton: UIBarButtonItem!
     
     // MARK: - Properties
     var taskList: [DataSnapshot]! = []
@@ -31,18 +32,38 @@ class TodoListViewController: UIViewController {
         self.taskTextField.delegate = self
         self.taskTextField.text = ""
         
-        self.tabBarController?.navigationItem.hidesBackButton = true
+        //self.tabBarController?.navigationItem.hidesBackButton = true
         
+        getProfilePic()
         getTodayTaskList()
        
     }
    
+    
+    
     // MARK: - Actions Add Task Tapped
     @IBAction func addTaskTapped(_ sender: Any) {
         let _ = textFieldShouldReturn(taskTextField)
         self.taskTextField.text = ""
     }
-    
+
+    // MARK: - Get Profile Picture
+    func getProfilePic(){
+        
+        if let photoUrl = TodoListUser.TodoAuth.user?.photoURL {
+            
+            let imageData = try? Data(contentsOf: photoUrl)
+            
+            if let imageData = imageData {
+                
+                self.profilePicBarButton.accessibilityFrame = CGRect(x: 0, y: 0, width: 30, height: 30)
+               
+                let image =  UIImage(data: imageData)?.resizeImage(to: self.profilePicBarButton.accessibilityFrame.size)
+                self.profilePicBarButton.setBackgroundImage(image, for : UIControl.State.normal, barMetrics: UIBarMetrics.default)
+            }
+        }
+
+    }
     
     // MARK: - Get Today Task List
     func getTodayTaskList() {
@@ -200,3 +221,5 @@ extension TodoListViewController: UITextFieldDelegate {
         return true
     }
 }
+
+

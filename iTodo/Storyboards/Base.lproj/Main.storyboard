@@ -194,7 +194,9 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Todo List" id="dJz-Ej-Nsg">
-                        <barButtonItem key="rightBarButtonItem" title="Sign Out" id="BvV-r2-Irs">
+                        <barButtonItem key="leftBarButtonItem" width="50" id="dK8-ks-ewB"/>
+                        <barButtonItem key="rightBarButtonItem" image="logout-32" style="plain" id="BvV-r2-Irs" userLabel="Logout Bar Button Item">
+                            <color key="tintColor" red="0.067763365810000004" green="0.69789862629999999" blue="0.89414525030000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             <connections>
                                 <action selector="signOutTapped:" destination="qnf-Fo-auv" id="2us-46-uSP"/>
                             </connections>
@@ -203,6 +205,7 @@
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="addTaskButton" destination="pnM-E5-x5N" id="vfC-27-ctM"/>
+                        <outlet property="profilePicBarButton" destination="dK8-ks-ewB" id="Gnr-CB-Ak7"/>
                         <outlet property="taskTableView" destination="Qhm-mA-sT1" id="mxY-Yw-52C"/>
                         <outlet property="taskTextField" destination="fcR-Hx-odD" id="rjr-ad-SwN"/>
                     </connections>
@@ -239,10 +242,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="hEm-Sj-1Kh">
-                                <rect key="frame" x="0.0" y="98" width="414" height="705"/>
+                                <rect key="frame" x="0.0" y="98" width="414" height="656"/>
                                 <subviews>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="pbM-nZ-wZx">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="705"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="656"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="TaskArchiveViewCell" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="TaskArchiveViewCell" textLabel="dNa-iG-a0P" detailTextLabel="umN-eL-TQb" style="IBUITableViewCellStyleSubtitle" id="uEd-mT-sor">
@@ -287,14 +290,19 @@
                             <constraint firstItem="hEm-Sj-1Kh" firstAttribute="top" secondItem="Kt1-yQ-FJb" secondAttribute="top" constant="10" id="uTE-Mk-gWL"/>
                         </constraints>
                     </view>
+                    <toolbarItems/>
                     <navigationItem key="navigationItem" title="Archive List" id="fs9-qW-1Rd">
-                        <barButtonItem key="rightBarButtonItem" title="Sign Out" id="KQd-cY-t5h">
+                        <barButtonItem key="leftBarButtonItem" id="cm5-9u-qc7" userLabel="Profile Pic Bar Button"/>
+                        <barButtonItem key="rightBarButtonItem" image="logout-32" style="plain" id="Rn4-gL-SJH" userLabel="Logout Bar Button Item">
+                            <color key="tintColor" red="0.067763365810000004" green="0.69789862629999999" blue="0.89414525030000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             <connections>
-                                <action selector="signOutTapped:" destination="Idd-se-wvs" id="bls-jZ-pzb"/>
+                                <action selector="signOutTapped:" destination="Idd-se-wvs" id="lHJ-Ns-owU"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="profilePicBarButton" destination="cm5-9u-qc7" id="LaA-TT-FMy"/>
                         <outlet property="taskArchiveTableView" destination="pbM-nZ-wZx" id="vE9-yW-pPh"/>
                     </connections>
                 </viewController>
@@ -306,6 +314,7 @@
     <resources>
         <image name="iTodo" width="1280" height="1280"/>
         <image name="list.bullet.rectangle" catalog="system" width="128" height="93"/>
+        <image name="logout-32" width="32" height="32"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
