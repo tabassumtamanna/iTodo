@@ -10,9 +10,9 @@ In iTodo app, users can create their to-do list, delete task and see the archive
 
 ## Features
 
+- Use Google SignIn with Firebase
+- Use Firebase to store data
 - Build an user interfaces with multiple pages of content
-- A networked API that provides the app with data
-- Data persistence on the device
 
 ## How to use the app
 This app allows users to add their daily task list.
