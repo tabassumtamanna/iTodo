@@ -1,11 +1,11 @@
 {
   "images" : [
     {
-      "filename" : "checked-checkbox-64.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
+      "filename" : "checkBoxUnChecked @2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },

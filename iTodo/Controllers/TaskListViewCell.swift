@@ -7,9 +7,10 @@
 
 import UIKit
 
+// MARK: - TaskListViewCell
 class TaskListViewCell: UITableViewCell {
 
-
+    // MARK: - Outlets
     @IBOutlet weak var checkboxImage: UIImageView!
     @IBOutlet weak var taskLabel: UILabel!
 

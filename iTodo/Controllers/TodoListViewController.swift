@@ -31,11 +31,8 @@ class TodoListViewController: UIViewController {
         self.taskTextField.delegate = self
         self.taskTextField.text = ""
         
-        //self.tabBarController?.navigationItem.hidesBackButton = true
-        
         getProfilePic()
         getTodayTaskList()
-       
     }
    
     
@@ -45,14 +42,10 @@ class TodoListViewController: UIViewController {
         let _ = textFieldShouldReturn(taskTextField)
         self.taskTextField.text = ""
     }
-
-    
     
     // MARK: - Get Today Task List
     func getTodayTaskList() {
-        
         TodoListUser.getTaskList(completion: handleTaskList(taskSnapshot:))
-        
     }
     
     // MARK:- Handle Task List
@@ -143,10 +136,10 @@ extension TodoListViewController:  UITableViewDataSource, UITableViewDelegate {
         let status = task[TodoList.status]
         
         if status == "1" {
-            cell.checkboxImage.image = UIImage(named: "checked")
+            cell.checkboxImage.image = UIImage(named: "checkBoxChecked")
             cell.taskLabel.textColor = .gray
         } else {
-            cell.checkboxImage.image = UIImage(named: "unchecked")
+            cell.checkboxImage.image = UIImage(named: "checkBoxUnChecked")
             cell.taskLabel.textColor = .black
         }
         
@@ -164,13 +157,13 @@ extension TodoListViewController:  UITableViewDataSource, UITableViewDelegate {
         
         var status = false
         
-        if cell.checkboxImage.image == UIImage(named: "checked"){
-            cell.checkboxImage.image = UIImage(named: "unchecked")
+        if cell.checkboxImage.image == UIImage(named: "checkBoxChecked"){
+            cell.checkboxImage.image = UIImage(named: "checkBoxUnChecked")
             cell.taskLabel.textColor = .black
             
         } else {
         
-            cell.checkboxImage.image = UIImage(named: "checked")
+            cell.checkboxImage.image = UIImage(named: "checkBoxChecked")
             cell.taskLabel.textColor = .gray
             
             status = true

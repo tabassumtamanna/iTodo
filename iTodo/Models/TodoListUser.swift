@@ -57,7 +57,6 @@ class TodoListUser {
         
         TodoAuth._refHandle = TodoAuth.ref.child(TodoList.tableName).queryOrdered(byChild: "userId").queryStarting(atValue: userId).queryEnding(atValue: userId).observe(.childAdded) { ( snapshot: DataSnapshot) in
             
-            
             completion(snapshot)
         }
     }

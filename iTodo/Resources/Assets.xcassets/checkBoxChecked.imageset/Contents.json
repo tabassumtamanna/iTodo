@@ -1,11 +1,11 @@
 {
   "images" : [
     {
-      "filename" : "square-outline-64.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
+      "filename" : "checkBoxChecked @2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
