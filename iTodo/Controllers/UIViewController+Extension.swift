@@ -31,6 +31,27 @@ extension  UIViewController {
         
     }
     
+    // MARK: - Get Profile Picture
+    func getProfilePic(){
+        
+        if let photoUrl = TodoListUser.TodoAuth.user?.photoURL {
+            
+            let button = UIButton(type: .system)
+            button.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
+            button.layer.cornerRadius = 15
+            button.clipsToBounds = true
+            button.imageView?.contentMode = .scaleAspectFit
+
+            let imageData = try? Data(contentsOf: photoUrl)
+            
+            if let imageData = imageData , let image =  UIImage(data: imageData)?.resizeImage(to: button.frame.size) {
+                button.setBackgroundImage(image, for: .normal)
+            }
+            
+            navigationItem.leftBarButtonItem = UIBarButtonItem(customView: button)
+        }
+    }
+    
     // MARK: - Get Formatted Date
     func getFormattedDate(date: Date, format: String) -> String {
             let dateformat = DateFormatter()

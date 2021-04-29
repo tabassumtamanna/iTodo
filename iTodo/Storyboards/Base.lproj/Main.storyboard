@@ -194,9 +194,8 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Todo List" id="dJz-Ej-Nsg">
-                        <barButtonItem key="leftBarButtonItem" width="50" id="dK8-ks-ewB"/>
-                        <barButtonItem key="rightBarButtonItem" image="logout-32" style="plain" id="BvV-r2-Irs" userLabel="Logout Bar Button Item">
-                            <color key="tintColor" red="0.067763365810000004" green="0.69789862629999999" blue="0.89414525030000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <barButtonItem key="rightBarButtonItem" image="logout" style="plain" id="BvV-r2-Irs" userLabel="Logout Bar Button Item">
+                            <color key="tintColor" white="0.75" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                             <connections>
                                 <action selector="signOutTapped:" destination="qnf-Fo-auv" id="2us-46-uSP"/>
                             </connections>
@@ -205,7 +204,6 @@
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="addTaskButton" destination="pnM-E5-x5N" id="vfC-27-ctM"/>
-                        <outlet property="profilePicBarButton" destination="dK8-ks-ewB" id="Gnr-CB-Ak7"/>
                         <outlet property="taskTableView" destination="Qhm-mA-sT1" id="mxY-Yw-52C"/>
                         <outlet property="taskTextField" destination="fcR-Hx-odD" id="rjr-ad-SwN"/>
                     </connections>
@@ -292,9 +290,8 @@
                     </view>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Archive List" id="fs9-qW-1Rd">
-                        <barButtonItem key="leftBarButtonItem" id="cm5-9u-qc7" userLabel="Profile Pic Bar Button"/>
-                        <barButtonItem key="rightBarButtonItem" image="logout-32" style="plain" id="Rn4-gL-SJH" userLabel="Logout Bar Button Item">
-                            <color key="tintColor" red="0.067763365810000004" green="0.69789862629999999" blue="0.89414525030000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <barButtonItem key="rightBarButtonItem" image="logout" style="plain" id="Rn4-gL-SJH" userLabel="Logout Bar Button Item">
+                            <color key="tintColor" white="0.75" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                             <connections>
                                 <action selector="signOutTapped:" destination="Idd-se-wvs" id="lHJ-Ns-owU"/>
                             </connections>
@@ -302,7 +299,6 @@
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="profilePicBarButton" destination="cm5-9u-qc7" id="LaA-TT-FMy"/>
                         <outlet property="taskArchiveTableView" destination="pbM-nZ-wZx" id="vE9-yW-pPh"/>
                     </connections>
                 </viewController>
@@ -314,7 +310,7 @@
     <resources>
         <image name="iTodo" width="1280" height="1280"/>
         <image name="list.bullet.rectangle" catalog="system" width="128" height="93"/>
-        <image name="logout-32" width="32" height="32"/>
+        <image name="logout" width="24" height="24"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
