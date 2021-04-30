@@ -18,6 +18,8 @@ In iTodo app, users can manage their to-do list and see the archive list. Archiv
 
 User has to login either using their google account or personalized email address. 
 
+![alt text](/ScreenShots/app-screen.png "App Screen")
+
 Upon successfull login, users are redirected to app dashboard. 
 
 In the dashboard navigation bar contains the profile picture in the left side and logout option on the right.
