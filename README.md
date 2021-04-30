@@ -18,9 +18,8 @@ In iTodo app, users can manage their to-do list and see the archive list. Archiv
 
 User has to login either using their google account or personalized email address. 
 
-<img src="/ScreenShots/app-screen.png" width="200" />
-<img src="/ScreenShots/login.png" width="200" />
-<br/>
+<img src="/ScreenShots/app-screen.png" width="200" /> <img src="/ScreenShots/login.png" width="200" />
+
 Upon successfull login, users are redirected to app dashboard. 
 
 In the dashboard navigation bar contains the profile picture in the left side and logout option on the right.
@@ -29,8 +28,7 @@ Also in the dashboard user will have the option to add a task using a input box 
 
 After adding a task it will appear as a list in the dashboard followed by a checkbox. Checkbox allow user to check/uncheck a task.
 
-<img src="/ScreenShots/dashboard.png" width="200" />
-<img src="/ScreenShots/dashboard-with-completed-task.png" width="200" />
+<img src="/ScreenShots/dashboard.png" width="200" /> <img src="/ScreenShots/dashboard-with-completed-task.png" width="200" />
 
 At the bottom of the dashboard there are two tabs: one is for the dashboard and another is the Archived List.
 
