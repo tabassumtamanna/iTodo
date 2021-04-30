@@ -45,7 +45,12 @@ The right bar button is the logout button.
 
 Download and unzip ```iTodo```
 
+### Cocoa Pods
 
+This project uses CocoaPods for it's dependencies. To initalize the project you should first install CocoaPods and then initialize the dependencies by running
 
+``` pod install ```
+
+After that, open the project using the iTodo.xcworkspace.
 
 
