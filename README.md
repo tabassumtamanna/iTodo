@@ -6,30 +6,33 @@ iTodo is a project for iOS Developer Nanodegree program at Udacity
 
 ## Overview
 
-In iTodo app, users can create their to-do list, delete task and see the archive list. 
+In iTodo app, users can manage their to-do list and see the archive list. Archive list are group by dates.  
 
 ## Features
 
-- Use Google SignIn with Firebase
-- Use Firebase to store data
-- Build an user interfaces with multiple pages of content
+- Allow user to login using Google Authentication 
+- Used Firebase for Data Persistence
 
-## How to use the app
-This app allows users to add their daily task list.
 
-First the user logs in to the app using their google/any email account. After login, the app takes the user to the Todo List view. 
+## App Workflow
 
-This view has two tabs at the bottom: one is Task List and another is Archived List.
+User has to login either using their google account or personalized email address. 
 
-On Task List View user can add task for today. There is a checkbox with each task. When user checked the task, it will be marked as completed. The completed tasks show as gray colors. User can delete any task by slide the task and click the delete button.
+Upon successfull login, users are redirected to app dashboard. 
 
-On the Archive Task View, user can see previous tasks list groped by the dates. The completed tasks shows as gray with completed date.
+In the dashboard navigation bar contains the profile picture in the left side and logout option on the right.
 
-Both the Task List and Archive List tab share the same navigation bar.
+Also in the dashboard user will have the option to add a task using a input box followed by a add button.
 
-The left bar button show if the user has a profile picture for that email address. 
+After adding a task it will appear as a list in the dashboard followed by a checkbox. Checkbox allow user to check/uncheck a task.
 
-The right bar button is the logout button.
+At the bottom of the dashboard there are two tabs: one is for the dashboard and another is the Archived List.
+
+Archived List contains all old tasks group by the dates. 
+
+In both list completed task are shown as grey and non completed task shown as black.
+
+User can remove any task from dashboard using swipe feature.
 
 ## Tools
 
