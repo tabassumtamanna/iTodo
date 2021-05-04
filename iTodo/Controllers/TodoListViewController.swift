@@ -16,7 +16,9 @@ class TodoListViewController: UIViewController {
     @IBOutlet weak var taskTextField: UITextField!
     @IBOutlet weak var addTaskButton: UIButton!
     @IBOutlet weak var taskTableView: UITableView!
-   
+    @IBOutlet weak var uploadMyTaskBarButton: UIBarButtonItem!
+    
+    
     
     // MARK: - Properties
     var taskList: [DataSnapshot]! = []
@@ -43,9 +45,18 @@ class TodoListViewController: UIViewController {
         self.taskTextField.text = ""
     }
     
+    
+    @IBAction func UploadMyTaskTapped(_ sender: Any) {
+        
+        print("Upload My Task")
+        
+    }
+    
     // MARK: - Get Today Task List
     func getTodayTaskList() {
         TodoListUser.getTaskList(completion: handleTaskList(taskSnapshot:))
+        
+        TodoListUser.getTasklistId(completion: handleTaskListId(tasklistId:error:))
     }
     
     // MARK:- Handle Task List
@@ -64,6 +75,45 @@ class TodoListViewController: UIViewController {
     }
   
 
+    func handleTaskListId(tasklistId: String?, error: Error?){
+         
+        if error == nil {
+            
+            if let tasklistId =  tasklistId , !tasklistId.isEmpty{
+                print("Yes: \(tasklistId)")
+                
+            } else {
+                print("No")
+                
+                TodoListUser.insertTasklists(completion: handleTaskListIdAddApi(taskListId:error:))
+            }
+        }
+        
+    }
+    
+    func handleTaskListIdAddApi(taskListId: String?, error: Error?){
+        
+        if error == nil {
+            
+            if let tasklistId =  taskListId , !tasklistId.isEmpty{
+                print("Yes: \(tasklistId)")
+                
+                TodoListUser.addTasklistId(tasklistId: tasklistId, completion: handleTaskListIdAddFB(status:error:))
+                
+            }
+        } else {
+            print(error?.localizedDescription)
+        }
+        
+    }
+    
+    func handleTaskListIdAddFB(status: Bool, error: Error?){
+        
+        if(status){
+            print("Successfully add tasklistId")
+        }
+    }
+    
     // MARK: - Add Task
     func addTask(taskTitle: String){
         

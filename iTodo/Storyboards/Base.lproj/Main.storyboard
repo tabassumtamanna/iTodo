@@ -194,18 +194,26 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Todo List" id="dJz-Ej-Nsg">
-                        <barButtonItem key="rightBarButtonItem" image="logout" style="plain" id="BvV-r2-Irs" userLabel="Logout Bar Button Item">
-                            <color key="tintColor" white="0.75" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                            <connections>
-                                <action selector="signOutTapped:" destination="qnf-Fo-auv" id="2us-46-uSP"/>
-                            </connections>
-                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem image="logout" style="plain" id="BvV-r2-Irs" userLabel="Logout Bar Button Item">
+                                <color key="tintColor" white="0.75" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                <connections>
+                                    <action selector="signOutTapped:" destination="qnf-Fo-auv" id="2us-46-uSP"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem title="Upload" id="0rC-cY-s7D">
+                                <connections>
+                                    <action selector="UploadMyTaskTapped:" destination="qnf-Fo-auv" id="9M0-t5-hlW"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="addTaskButton" destination="pnM-E5-x5N" id="vfC-27-ctM"/>
                         <outlet property="taskTableView" destination="Qhm-mA-sT1" id="mxY-Yw-52C"/>
                         <outlet property="taskTextField" destination="fcR-Hx-odD" id="rjr-ad-SwN"/>
+                        <outlet property="uploadMyTaskBarButton" destination="0rC-cY-s7D" id="vUW-bx-HIi"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DXp-fY-iTl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
