@@ -422,12 +422,12 @@ PODS:
     - GTMSessionFetcher/Core (~> 1.5)
   - GTMSessionFetcher/Core (1.5.0)
   - leveldb-library (1.22.1)
+  - MarqueeLabel (4.0.5)
   - nanopb (2.30908.0):
     - nanopb/decode (= 2.30908.0)
     - nanopb/encode (= 2.30908.0)
   - nanopb/decode (2.30908.0)
   - nanopb/encode (2.30908.0)
-  - OAuthSwift (2.0.0)
   - PromisesObjC (1.2.12)
   - SDWebImage (5.11.1):
     - SDWebImage/Core (= 5.11.1)
@@ -439,8 +439,7 @@ DEPENDENCIES:
   - Firebase/Database
   - Firebase/RemoteConfig
   - FirebaseUI
-  - GoogleSignIn
-  - OAuthSwift (~> 2.0.0)
+  - MarqueeLabel
 
 SPEC REPOS:
   trunk:
@@ -470,8 +469,8 @@ SPEC REPOS:
     - GTMAppAuth
     - GTMSessionFetcher
     - leveldb-library
+    - MarqueeLabel
     - nanopb
-    - OAuthSwift
     - PromisesObjC
     - SDWebImage
 
@@ -502,11 +501,11 @@ SPEC CHECKSUMS:
   GTMAppAuth: ad5c2b70b9a8689e1a04033c9369c4915bfcbe89
   GTMSessionFetcher: b3503b20a988c4e20cc189aa798fd18220133f52
   leveldb-library: 50c7b45cbd7bf543c81a468fe557a16ae3db8729
+  MarqueeLabel: 00cc0bcd087111dca575878b3531af980559707d
   nanopb: a0ba3315591a9ae0a16a309ee504766e90db0c96
-  OAuthSwift: 6805456763cf1c7ae0c16765257ed430b7aacae7
   PromisesObjC: 3113f7f76903778cf4a0586bd1ab89329a0b7b97
   SDWebImage: a7f831e1a65eb5e285e3fb046a23fcfbf08e696d
 
-PODFILE CHECKSUM: 6f200d94b030f423c35bd6dcbf9f9e9352921add
+PODFILE CHECKSUM: a13b510c5dd463e9801f9801570c55fabd506fd7
 
 COCOAPODS: 1.10.1

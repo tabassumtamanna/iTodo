@@ -11,10 +11,9 @@ import FirebaseUI
 
 
 // MARK: - LoginViewController
-class LoginViewController: UIViewController, FUIAuthDelegate {
+class LoginViewController: UIViewController {
 
     // MARK:-  Properties
-    fileprivate var _authHandle: AuthStateDidChangeListenerHandle!
     var user: User?
    
     
@@ -60,12 +59,8 @@ class LoginViewController: UIViewController, FUIAuthDelegate {
     
     // MARK: - Login Session
     func loginSession() {
-        guard let authUI = FUIAuth.defaultAuthUI() else { return }
-
-        authUI.delegate = self
         
-        //let authViewController = FUIAuth.defaultAuthUI()!.authViewController()
-        let authViewController = authUI.authViewController()
+        let authViewController = FUIAuth.defaultAuthUI()!.authViewController()
         self.present(authViewController, animated: true, completion: nil)
     }
     
@@ -79,26 +74,4 @@ class LoginViewController: UIViewController, FUIAuthDelegate {
     }
     
     
-}
-
-extension LoginViewController {
-    func authUI(_ authUI: FUIAuth, didSignInWith authDataResult: AuthDataResult?, error: Error?) {
-      if let error = error as NSError?,
-          error.code == FUIAuthErrorCode.mergeConflict.rawValue {
-        // Merge conflict error, discard the anonymous user and login as the existing
-        // non-anonymous user.
-        guard let credential = error.userInfo[FUIAuthCredentialKey] as? AuthCredential else {
-          print("Received merge conflict error without auth credential!")
-          return
-        }
-
-        
-      } else if let error = error {
-        // Some non-merge conflict error happened.
-        print("Failed to log in: \(error)")
-        return
-      }
-
-      // Handle successful login
-    }
 }

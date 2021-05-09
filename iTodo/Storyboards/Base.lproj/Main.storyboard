@@ -142,10 +142,10 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="ffa-g4-WVJ" userLabel="Table Stack View">
-                                        <rect key="frame" x="0.0" y="65" width="394" height="599.5"/>
+                                        <rect key="frame" x="0.0" y="65" width="394" height="602"/>
                                         <subviews>
                                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Qhm-mA-sT1">
-                                                <rect key="frame" x="0.0" y="0.0" width="394" height="599.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="394" height="602"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <prototypes>
                                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="TaskListViewCell" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="TaskListViewCell" rowHeight="89" id="Jj6-gq-97M" customClass="TaskListViewCell" customModule="iTodo" customModuleProvider="target">
@@ -182,13 +182,18 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="aYa-k8-ind" userLabel="Label Stack View">
-                                        <rect key="frame" x="0.0" y="684.5" width="394" height="20.5"/>
+                                        <rect key="frame" x="0.0" y="687" width="394" height="18"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="clip" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vPD-2l-gmB">
-                                                <rect key="frame" x="0.0" y="0.0" width="394" height="20.5"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="clip" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cUu-nQ-HjN" userLabel="Jokes Label" customClass="MarqueeLabel" customModule="MarqueeLabel">
+                                                <rect key="frame" x="0.0" y="0.0" width="394" height="18"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="fadeLength">
+                                                        <real key="value" value="12"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
                                             </label>
                                         </subviews>
                                     </stackView>
@@ -205,27 +210,19 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Todo List" id="dJz-Ej-Nsg">
-                        <rightBarButtonItems>
-                            <barButtonItem image="logout" style="plain" id="BvV-r2-Irs" userLabel="Logout Bar Button Item">
-                                <color key="tintColor" white="0.75" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                                <connections>
-                                    <action selector="signOutTapped:" destination="qnf-Fo-auv" id="2us-46-uSP"/>
-                                </connections>
-                            </barButtonItem>
-                            <barButtonItem title="Upload" id="0rC-cY-s7D">
-                                <connections>
-                                    <action selector="UploadMyTaskTapped:" destination="qnf-Fo-auv" id="9M0-t5-hlW"/>
-                                </connections>
-                            </barButtonItem>
-                        </rightBarButtonItems>
+                        <barButtonItem key="rightBarButtonItem" image="logout" style="plain" id="BvV-r2-Irs" userLabel="Logout Bar Button Item">
+                            <color key="tintColor" white="0.75" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                            <connections>
+                                <action selector="signOutTapped:" destination="qnf-Fo-auv" id="2us-46-uSP"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="addTaskButton" destination="pnM-E5-x5N" id="vfC-27-ctM"/>
-                        <outlet property="jokesLabel" destination="vPD-2l-gmB" id="HeK-gC-DHz"/>
+                        <outlet property="jokesLabel" destination="cUu-nQ-HjN" id="rcv-qw-vfh"/>
                         <outlet property="taskTableView" destination="Qhm-mA-sT1" id="mxY-Yw-52C"/>
                         <outlet property="taskTextField" destination="fcR-Hx-odD" id="rjr-ad-SwN"/>
-                        <outlet property="uploadMyTaskBarButton" destination="0rC-cY-s7D" id="vUW-bx-HIi"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DXp-fY-iTl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -327,6 +324,9 @@
             <point key="canvasLocation" x="-487" y="654"/>
         </scene>
     </scenes>
+    <designables>
+        <designable name="cUu-nQ-HjN"/>
+    </designables>
     <resources>
         <image name="iTodo" width="1280" height="1280"/>
         <image name="list.bullet.rectangle" catalog="system" width="128" height="93"/>

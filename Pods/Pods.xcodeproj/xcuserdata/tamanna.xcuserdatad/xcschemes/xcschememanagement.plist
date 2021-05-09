@@ -214,12 +214,12 @@
 			<key>orderHint</key>
 			<integer>28</integer>
 		</dict>
-		<key>OAuthSwift.xcscheme</key>
+		<key>MarqueeLabel.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 			<key>orderHint</key>
-			<integer>36</integer>
+			<integer>35</integer>
 		</dict>
 		<key>Pods-iTodo.xcscheme</key>
 		<dict>
@@ -282,7 +282,7 @@
 			<key>isShown</key>
 			<false/>
 			<key>orderHint</key>
-			<integer>35</integer>
+			<integer>36</integer>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>

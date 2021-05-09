@@ -11,6 +11,6 @@
 #endif
 
 
-FOUNDATION_EXPORT double OAuthSwiftVersionNumber;
-FOUNDATION_EXPORT const unsigned char OAuthSwiftVersionString[];
+FOUNDATION_EXPORT double MarqueeLabelVersionNumber;
+FOUNDATION_EXPORT const unsigned char MarqueeLabelVersionString[];
 

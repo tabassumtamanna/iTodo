@@ -30,29 +30,10 @@ class TodoListUser {
     
     enum Endpoints{
         
-        static let base = "https://tasks.googleapis.com/tasks/v1/users"
-        
-        
-        case getAuth
-        case getTaskListFromApi
-        case insertTasklists(String)
-        case uploadMyTask
         case getRandomJokes
         
         var stringValue: String{
             switch self{
-            
-            case .getAuth:
-                return "https://accounts.google.com/o/oauth2/v2/auth?response_type=code&scope=https://www.googleapis.com/auth/tasks&redirect_uri=http://localhost/oauth2callback&client_id=" + (FirebaseApp.app()?.options.clientID)!
-            
-            case .getTaskListFromApi:
-                return Endpoints.base + "/\(TodoAuth.user?.uid)/lists?key=AIzaSyAJPus5nQYDg0eM06WSI1vRoAm7S08tHVA"
-            
-            case .insertTasklists(let userId):
-                return Endpoints.base + "/\(userId)/lists?key=AIzaSyAJPus5nQYDg0eM06WSI1vRoAm7S08tHVA"
-                
-            case .uploadMyTask:
-                return Endpoints.base + ""
                 
             case .getRandomJokes:
                 return "https://official-joke-api.appspot.com/random_joke"
@@ -94,87 +75,21 @@ class TodoListUser {
         return task
     }
     
-    // MARK: - Task For Post Request
-    class func taskForPOSTRequest<RequestType: Encodable, ResponseType: Decodable>(url: URL, responseType: ResponseType.Type, body: RequestType,  completion: @escaping (ResponseType?, Error?) -> Void){
+    // MARK: - API
+    // MARK: - Get Random Jokes
+    class func getRandomJokes(completion: @escaping (String?, String?, Error?) -> Void){
         
-        var request = URLRequest(url: url)
+        print(Endpoints.getRandomJokes.url)
         
-        request.httpMethod = "POST"
-        request.addValue("application/json", forHTTPHeaderField: "Accept")
-        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.httpBody = try! JSONEncoder().encode(body)
-        
-        let encoder = JSONEncoder()
-        if let json = try? encoder.encode(body) {
-            print(String(data: json, encoding: .utf8)!)
-        }
-        
-        let task = URLSession.shared.dataTask(with: request)  {(data, response, error) in
-           
-            guard let data = data else {
-               
-                DispatchQueue.main.async {
-                    completion(nil, error)
-                }
-                return
-            }
-            var newData = data
-            let docoder = JSONDecoder()
-           
-            do {
-                let requestObject = try docoder.decode(ResponseType.self, from: newData)
-               
-                DispatchQueue.main.async {
-                    completion(requestObject, nil)
-                }
-                
-            } catch {
-                
-                DispatchQueue.main.async {
-                    completion(nil, error)
-                }
-            }
-        }
-        task.resume()
-        
-    }
-    
-    // MARK: -  Google API
-    
-    class func getAuth(){
-        
-       
-        
-    }
-    
-    class func getTaskListFromApi(){
-        
-        
-    }
-    
-    class func insertTasklists(completion: @escaping (String?, Error?) -> Void){
-        
-        print("insertTasklists")
-        
-        let userId = TodoAuth.user?.uid ?? ""
-        
-        let body = TaskListResponse(kind: "", id: "", etag: "", title: "aaaa", updated: "", selfLink: "")
-        print("URL: \(Endpoints.insertTasklists(userId).url)")
-        taskForPOSTRequest(url: Endpoints.insertTasklists(userId).url, responseType: TaskListResponse.self, body: body) {( response, error) in
+        taskForGETRequest(url: Endpoints.getRandomJokes.url, responseType: OfficialJokesApiResponse.self) { (response, error) in
             
             if let response = response {
-                print("response: \(response)")
-                completion(response.id, nil)
+                completion(response.setup, response.punchline, nil)
             } else {
-                print("error: \(error)")
-                completion(nil, error)
+                completion("", "",  error)
             }
         }
-        
     }
-    
-    
-    
     
     
     // MARK: -   Firebase
@@ -284,46 +199,6 @@ class TodoListUser {
     }
     
     
-    // MARK: - Get Task list Id To User Table
-    class func getTasklistId( completion: @escaping (String?, Error?) -> Void){
-        
-        TodoAuth.ref = Database.database().reference()
-        
-        let userId = TodoAuth.user?.uid
-        
-        TodoAuth.ref.child(TodoList.usersTable).child(userId!).observeSingleEvent(of: .value, with: { (snapshot) in
-          // Get user value
-            //let value = snapshot.value as! [String: String]
-            print("snapshot: \(snapshot)")
-            
-            completion("", nil)
-          // ...
-          }) { (error) in
-            print(error.localizedDescription)
-            completion(nil, error)
-        }
-        
-        
-    }
-    
-    // MARK: - Add Task list Id To User Table
-    class func addTasklistId(tasklistId: String, completion: @escaping (Bool, Error?) -> Void) {
-        
-        let userId = TodoAuth.user?.uid
-        
-        let todolistUser = ["tasklistId": tasklistId,
-                            "userId": userId
-                            ]
-        
-        TodoAuth.ref.child(TodoList.usersTable).childByAutoId().setValue(todolistUser) { (error:Error?, ref:DatabaseReference) in
-            if let error = error {
-                completion(false, error)
-            } else {
-                completion(true, nil)
-            }
-        }
-    }
-    
     // MARK: - Deinit
     deinit {
         
@@ -333,19 +208,6 @@ class TodoListUser {
     }
     
     
-    class func getRandomJokes(completion: @escaping (String?, String?, Error?) -> Void){
-        
-        print(Endpoints.getRandomJokes.url)
-        
-        taskForGETRequest(url: Endpoints.getRandomJokes.url, responseType: OfficialJokesApiResponse.self) { (response, error) in
-            
-            if let response = response {
-                completion(response.setup, response.punchline, nil)
-            } else {
-                completion("", "",  error)
-            }
-        }
-    }
     
     
 }
