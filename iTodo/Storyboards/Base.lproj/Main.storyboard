@@ -142,10 +142,10 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="ffa-g4-WVJ" userLabel="Table Stack View">
-                                        <rect key="frame" x="0.0" y="65" width="394" height="640"/>
+                                        <rect key="frame" x="0.0" y="65" width="394" height="599.5"/>
                                         <subviews>
                                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Qhm-mA-sT1">
-                                                <rect key="frame" x="0.0" y="0.0" width="394" height="640"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="394" height="599.5"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <prototypes>
                                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="TaskListViewCell" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="TaskListViewCell" rowHeight="89" id="Jj6-gq-97M" customClass="TaskListViewCell" customModule="iTodo" customModuleProvider="target">
@@ -181,6 +181,17 @@
                                             </tableView>
                                         </subviews>
                                     </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="aYa-k8-ind" userLabel="Label Stack View">
+                                        <rect key="frame" x="0.0" y="684.5" width="394" height="20.5"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="clip" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vPD-2l-gmB">
+                                                <rect key="frame" x="0.0" y="0.0" width="394" height="20.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
                                 </subviews>
                             </stackView>
                         </subviews>
@@ -211,6 +222,7 @@
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="addTaskButton" destination="pnM-E5-x5N" id="vfC-27-ctM"/>
+                        <outlet property="jokesLabel" destination="vPD-2l-gmB" id="HeK-gC-DHz"/>
                         <outlet property="taskTableView" destination="Qhm-mA-sT1" id="mxY-Yw-52C"/>
                         <outlet property="taskTextField" destination="fcR-Hx-odD" id="rjr-ad-SwN"/>
                         <outlet property="uploadMyTaskBarButton" destination="0rC-cY-s7D" id="vUW-bx-HIi"/>

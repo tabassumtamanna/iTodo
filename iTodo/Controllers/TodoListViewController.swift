@@ -7,6 +7,7 @@
 
 import UIKit
 import Firebase
+import OAuthSwift
 
 // MARK: - TodoListViewController
 class TodoListViewController: UIViewController {
@@ -17,7 +18,7 @@ class TodoListViewController: UIViewController {
     @IBOutlet weak var addTaskButton: UIButton!
     @IBOutlet weak var taskTableView: UITableView!
     @IBOutlet weak var uploadMyTaskBarButton: UIBarButtonItem!
-    
+    @IBOutlet weak var jokesLabel: UILabel!
     
     
     // MARK: - Properties
@@ -35,6 +36,7 @@ class TodoListViewController: UIViewController {
         
         getProfilePic()
         getTodayTaskList()
+        getRandomJokes()
     }
    
     
@@ -50,13 +52,36 @@ class TodoListViewController: UIViewController {
         
         print("Upload My Task")
         
+        // create an instance and retain it
+        let oauthswift = OAuth2Swift(
+            consumerKey:    "ca385eebd79d4582bd465e2aaeccaf34",
+            consumerSecret: "8b13fc0446e24afc8e358c3256881d82",
+            authorizeUrl:   "https://todoist.com/oauth/authorize?client_id=ca385eebd79d4582bd465e2aaeccaf34&scope=data:read,data:delete&state=secretstring",
+            responseType:   "token"
+        )
+        let handle = oauthswift.authorize(
+            withCallbackURL: "iTodo://oauth-callback/iTodo",
+            scope: "data:read,data:delete", state:"secretstring") { result in
+            print("result: \(result)")
+            switch result {
+            case .success(let (credential, response, parameters)):
+              print("------ Succcess--------", response)
+              print(credential.oauthToken)
+              // Do your request
+            case .failure(let error):
+              print("------ Failed--------")
+              print(error.localizedDescription)
+            }
+        }
+        print("HERE")
+        
     }
     
     // MARK: - Get Today Task List
     func getTodayTaskList() {
         TodoListUser.getTaskList(completion: handleTaskList(taskSnapshot:))
         
-        TodoListUser.getTasklistId(completion: handleTaskListId(tasklistId:error:))
+        //TodoListUser.getTasklistId(completion: handleTaskListId(tasklistId:error:))
     }
     
     // MARK:- Handle Task List
@@ -164,7 +189,31 @@ class TodoListViewController: UIViewController {
         }
     }
     
+    func getRandomJokes(){
+        
+        TodoListUser.getRandomJokes(completion: handleRandomJokes(setup:punchline:error:))
+    }
     
+    func handleRandomJokes(setup: String?, punchline: String?, error: Error?){
+        
+       
+        if let setup = setup, let  punchline = punchline {
+            print(setup)
+            print(punchline)
+            
+            self.jokesLabel.text = setup + " " + punchline
+            
+            self.jokesLabel.translatesAutoresizingMaskIntoConstraints = false
+            self.jokesLabel.font = .systemFont(ofSize: 17)
+            self.jokesLabel.textColor = .blue
+           
+
+            UIView.animate(withDuration: 12.0, delay: 1, options: ([.curveLinear, .repeat]), animations: {() -> Void in
+                    self.jokesLabel.center = CGPoint(x: 0 - self.jokesLabel.bounds.size.width / 2, y: self.jokesLabel.center.y)
+                }, completion:  { _ in })
+        }
+            
+    }
 }
 
 // MARK: - TodoListViewController:  UITableViewDataSource, UITableViewDelegate

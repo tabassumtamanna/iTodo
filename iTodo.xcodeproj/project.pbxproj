@@ -23,6 +23,7 @@
 		E9A8DD6E25F9C89500B1A2ED /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E9A8DD6C25F9C89500B1A2ED /* Main.storyboard */; };
 		E9A8DD7025F9C89600B1A2ED /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E9A8DD6F25F9C89600B1A2ED /* Assets.xcassets */; };
 		E9A8DD7325F9C89600B1A2ED /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E9A8DD7125F9C89600B1A2ED /* LaunchScreen.storyboard */; };
+		E9ABF694264529C3008C93C8 /* OfficialJokesApiResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9ABF693264529C3008C93C8 /* OfficialJokesApiResponse.swift */; };
 		E9F796202606FD3100955DE8 /* TaskListViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F7961F2606FD3100955DE8 /* TaskListViewCell.swift */; };
 /* End PBXBuildFile section */
 
@@ -47,6 +48,7 @@
 		E9A8DD6F25F9C89600B1A2ED /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E9A8DD7225F9C89600B1A2ED /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E9A8DD7425F9C89600B1A2ED /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = iTodo/Resources/Info.plist; sourceTree = SOURCE_ROOT; };
+		E9ABF693264529C3008C93C8 /* OfficialJokesApiResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfficialJokesApiResponse.swift; sourceTree = "<group>"; };
 		E9F7961F2606FD3100955DE8 /* TaskListViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -91,6 +93,7 @@
 			isa = PBXGroup;
 			children = (
 				E964F5E8263FEBB800313D18 /* TaskListResponse.swift */,
+				E9ABF693264529C3008C93C8 /* OfficialJokesApiResponse.swift */,
 			);
 			path = Responses;
 			sourceTree = "<group>";
@@ -323,6 +326,7 @@
 				E99F7DF6262C174900B0FE1E /* LoginViewController.swift in Sources */,
 				E964F5E9263FEBB800313D18 /* TaskListResponse.swift in Sources */,
 				E99F7DF1262AAA3A00B0FE1E /* TodoListViewController.swift in Sources */,
+				E9ABF694264529C3008C93C8 /* OfficialJokesApiResponse.swift in Sources */,
 				E9F796202606FD3100955DE8 /* TaskListViewCell.swift in Sources */,
 				E99F7E26262C3BC000B0FE1E /* TodoArchiveViewController.swift in Sources */,
 				E9A8DD6725F9C89500B1A2ED /* AppDelegate.swift in Sources */,

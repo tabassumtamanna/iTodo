@@ -11,7 +11,7 @@ import FirebaseUI
 
 
 // MARK: - LoginViewController
-class LoginViewController: UIViewController {
+class LoginViewController: UIViewController, FUIAuthDelegate {
 
     // MARK:-  Properties
     fileprivate var _authHandle: AuthStateDidChangeListenerHandle!
@@ -25,6 +25,8 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.setNavigationBarHidden(true, animated: false)
+        
+        //TodoListUser.checkConnection(completion: handleConnection(status:))
         configureAuth()
     }
     
@@ -58,8 +60,45 @@ class LoginViewController: UIViewController {
     
     // MARK: - Login Session
     func loginSession() {
-        let authViewController = FUIAuth.defaultAuthUI()!.authViewController()
+        guard let authUI = FUIAuth.defaultAuthUI() else { return }
+
+        authUI.delegate = self
+        
+        //let authViewController = FUIAuth.defaultAuthUI()!.authViewController()
+        let authViewController = authUI.authViewController()
         self.present(authViewController, animated: true, completion: nil)
     }
     
+    
+    func handleConnection(status: Bool){
+        
+        if(status == false){
+            
+            showFailureMessage(title: "Login Failed", message: "Please check your connection")
+        }
+    }
+    
+    
+}
+
+extension LoginViewController {
+    func authUI(_ authUI: FUIAuth, didSignInWith authDataResult: AuthDataResult?, error: Error?) {
+      if let error = error as NSError?,
+          error.code == FUIAuthErrorCode.mergeConflict.rawValue {
+        // Merge conflict error, discard the anonymous user and login as the existing
+        // non-anonymous user.
+        guard let credential = error.userInfo[FUIAuthCredentialKey] as? AuthCredential else {
+          print("Received merge conflict error without auth credential!")
+          return
+        }
+
+        
+      } else if let error = error {
+        // Some non-merge conflict error happened.
+        print("Failed to log in: \(error)")
+        return
+      }
+
+      // Handle successful login
+    }
 }

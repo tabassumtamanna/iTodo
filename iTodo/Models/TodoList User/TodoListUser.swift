@@ -17,6 +17,7 @@ class TodoListUser {
         static var ref: DatabaseReference!
         static var _authHandle: AuthStateDidChangeListenerHandle!
         static var _refHandle: DatabaseHandle!
+        static var cconnectedRef: DatabaseReference!
         
         static var user: User?
     }
@@ -32,12 +33,17 @@ class TodoListUser {
         static let base = "https://tasks.googleapis.com/tasks/v1/users"
         
         
+        case getAuth
         case getTaskListFromApi
         case insertTasklists(String)
         case uploadMyTask
+        case getRandomJokes
         
         var stringValue: String{
             switch self{
+            
+            case .getAuth:
+                return "https://accounts.google.com/o/oauth2/v2/auth?response_type=code&scope=https://www.googleapis.com/auth/tasks&redirect_uri=http://localhost/oauth2callback&client_id=" + (FirebaseApp.app()?.options.clientID)!
             
             case .getTaskListFromApi:
                 return Endpoints.base + "/\(TodoAuth.user?.uid)/lists?key=AIzaSyAJPus5nQYDg0eM06WSI1vRoAm7S08tHVA"
@@ -47,12 +53,45 @@ class TodoListUser {
                 
             case .uploadMyTask:
                 return Endpoints.base + ""
+                
+            case .getRandomJokes:
+                return "https://official-joke-api.appspot.com/random_joke"
             }
+           
         }
         
         var url: URL {
             return URL(string: stringValue)!
         }
+    }
+    
+    // MARK: - Task For GET Request
+    @discardableResult class func taskForGETRequest<ResponseType: Decodable>(url: URL, responseType: ResponseType.Type, completion: @escaping (ResponseType?, Error?) -> Void) -> URLSessionTask {
+       
+        let task = URLSession.shared.dataTask(with: url) { data, response, error in
+            guard let data = data else {
+                DispatchQueue.main.async {
+                    completion(nil, error)
+                }
+                return
+            }
+            
+            
+            let decoder = JSONDecoder()
+            do {
+                let responseObject = try decoder.decode(ResponseType.self, from: data)
+                
+                DispatchQueue.main.async {
+                    completion(responseObject, nil)
+                }
+            } catch {
+                DispatchQueue.main.async {
+                    completion(nil, error)
+                }
+            }
+        }
+        task.resume()
+        return task
     }
     
     // MARK: - Task For Post Request
@@ -102,6 +141,12 @@ class TodoListUser {
     
     // MARK: -  Google API
     
+    class func getAuth(){
+        
+       
+        
+    }
+    
     class func getTaskListFromApi(){
         
         
@@ -112,7 +157,7 @@ class TodoListUser {
         print("insertTasklists")
         
         let userId = TodoAuth.user?.uid ?? ""
-
+        
         let body = TaskListResponse(kind: "", id: "", etag: "", title: "aaaa", updated: "", selfLink: "")
         print("URL: \(Endpoints.insertTasklists(userId).url)")
         taskForPOSTRequest(url: Endpoints.insertTasklists(userId).url, responseType: TaskListResponse.self, body: body) {( response, error) in
@@ -140,9 +185,11 @@ class TodoListUser {
         let provider: [FUIAuthProvider] = [FUIGoogleAuth(), FUIEmailAuth()]
         FUIAuth.defaultAuthUI()?.providers = provider
         
+        
         // listen for changes in the authorization state
         TodoAuth._authHandle = Auth.auth().addStateDidChangeListener { (auth: Auth, user: User?) in
-            
+           
+            print(auth)
             // check if there is a current user
             if let activeUser = user {
                 
@@ -154,6 +201,23 @@ class TodoListUser {
             }
         }
         
+        
+        
+    }
+    
+    class func checkConnection(completion: @escaping (Bool) -> Void){
+        
+        TodoAuth.cconnectedRef = Database.database().reference(withPath: ".info/connected")
+        
+        TodoAuth.cconnectedRef.observe(.value, with: { (connected) in
+            if let boolean = connected.value as? Bool, boolean == true {
+                print("Firebase is connected")
+                completion(true)
+            } else {
+                print("Firebase is NOT connected")
+                completion(false)
+            }
+        })
     }
     
     
@@ -265,6 +329,22 @@ class TodoListUser {
         
         Auth.auth().removeStateDidChangeListener(TodoAuth._authHandle)
         TodoAuth.ref.child("Tasks").removeObserver(withHandle: TodoAuth._refHandle)
+        TodoAuth.cconnectedRef.removeAllObservers()
+    }
+    
+    
+    class func getRandomJokes(completion: @escaping (String?, String?, Error?) -> Void){
+        
+        print(Endpoints.getRandomJokes.url)
+        
+        taskForGETRequest(url: Endpoints.getRandomJokes.url, responseType: OfficialJokesApiResponse.self) { (response, error) in
+            
+            if let response = response {
+                completion(response.setup, response.punchline, nil)
+            } else {
+                completion("", "",  error)
+            }
+        }
     }
     
     
