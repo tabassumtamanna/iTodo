@@ -8,8 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		C85EAD0D24E84214A232A5D6 /* Pods_iTodo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 13B3E5333CB18C68CEF4C4C5 /* Pods_iTodo.framework */; };
-		E964F5E6263FEA8800313D18 /* TaskListRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E964F5E5263FEA8800313D18 /* TaskListRequest.swift */; };
-		E964F5E9263FEBB800313D18 /* TaskListResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = E964F5E8263FEBB800313D18 /* TaskListResponse.swift */; };
 		E99F7DEB262A9ECE00B0FE1E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E99F7DEA262A9ECE00B0FE1E /* GoogleService-Info.plist */; };
 		E99F7DF1262AAA3A00B0FE1E /* TodoListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E99F7DF0262AAA3A00B0FE1E /* TodoListViewController.swift */; };
 		E99F7DF6262C174900B0FE1E /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E99F7DF5262C174800B0FE1E /* LoginViewController.swift */; };
@@ -23,6 +21,7 @@
 		E9A8DD6E25F9C89500B1A2ED /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E9A8DD6C25F9C89500B1A2ED /* Main.storyboard */; };
 		E9A8DD7025F9C89600B1A2ED /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E9A8DD6F25F9C89600B1A2ED /* Assets.xcassets */; };
 		E9A8DD7325F9C89600B1A2ED /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E9A8DD7125F9C89600B1A2ED /* LaunchScreen.storyboard */; };
+		E9ABF694264529C3008C93C8 /* OfficialJokesApiResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9ABF693264529C3008C93C8 /* OfficialJokesApiResponse.swift */; };
 		E9F796202606FD3100955DE8 /* TaskListViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F7961F2606FD3100955DE8 /* TaskListViewCell.swift */; };
 /* End PBXBuildFile section */
 
@@ -30,8 +29,6 @@
 		13B3E5333CB18C68CEF4C4C5 /* Pods_iTodo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iTodo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3DB9E1395B614825A35EB8CF /* Pods-iTodo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iTodo.debug.xcconfig"; path = "Target Support Files/Pods-iTodo/Pods-iTodo.debug.xcconfig"; sourceTree = "<group>"; };
 		E281F1FFD3FCE40D01C4064E /* Pods-iTodo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iTodo.release.xcconfig"; path = "Target Support Files/Pods-iTodo/Pods-iTodo.release.xcconfig"; sourceTree = "<group>"; };
-		E964F5E5263FEA8800313D18 /* TaskListRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListRequest.swift; sourceTree = "<group>"; };
-		E964F5E8263FEBB800313D18 /* TaskListResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListResponse.swift; sourceTree = "<group>"; };
 		E99F7DEA262A9ECE00B0FE1E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E99F7DF0262AAA3A00B0FE1E /* TodoListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoListViewController.swift; sourceTree = "<group>"; };
 		E99F7DF5262C174800B0FE1E /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -47,6 +44,7 @@
 		E9A8DD6F25F9C89600B1A2ED /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E9A8DD7225F9C89600B1A2ED /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E9A8DD7425F9C89600B1A2ED /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = iTodo/Resources/Info.plist; sourceTree = SOURCE_ROOT; };
+		E9ABF693264529C3008C93C8 /* OfficialJokesApiResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfficialJokesApiResponse.swift; sourceTree = "<group>"; };
 		E9F7961F2606FD3100955DE8 /* TaskListViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -79,18 +77,10 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		E964F5BA263FB46C00313D18 /* Requests */ = {
-			isa = PBXGroup;
-			children = (
-				E964F5E5263FEA8800313D18 /* TaskListRequest.swift */,
-			);
-			path = Requests;
-			sourceTree = "<group>";
-		};
 		E964F5BB263FB4AD00313D18 /* Responses */ = {
 			isa = PBXGroup;
 			children = (
-				E964F5E8263FEBB800313D18 /* TaskListResponse.swift */,
+				E9ABF693264529C3008C93C8 /* OfficialJokesApiResponse.swift */,
 			);
 			path = Responses;
 			sourceTree = "<group>";
@@ -140,7 +130,6 @@
 				E99F7EBE263671F700B0FE1E /* Task.swift */,
 				E964F5BC263FB4C300313D18 /* TodoList User */,
 				E964F5BB263FB4AD00313D18 /* Responses */,
-				E964F5BA263FB46C00313D18 /* Requests */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -318,11 +307,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E964F5E6263FEA8800313D18 /* TaskListRequest.swift in Sources */,
 				E99F7E29262C4B9D00B0FE1E /* UIViewController+Extension.swift in Sources */,
 				E99F7DF6262C174900B0FE1E /* LoginViewController.swift in Sources */,
-				E964F5E9263FEBB800313D18 /* TaskListResponse.swift in Sources */,
 				E99F7DF1262AAA3A00B0FE1E /* TodoListViewController.swift in Sources */,
+				E9ABF694264529C3008C93C8 /* OfficialJokesApiResponse.swift in Sources */,
 				E9F796202606FD3100955DE8 /* TaskListViewCell.swift in Sources */,
 				E99F7E26262C3BC000B0FE1E /* TodoArchiveViewController.swift in Sources */,
 				E9A8DD6725F9C89500B1A2ED /* AppDelegate.swift in Sources */,

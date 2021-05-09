@@ -14,7 +14,6 @@ import FirebaseUI
 class LoginViewController: UIViewController {
 
     // MARK:-  Properties
-    fileprivate var _authHandle: AuthStateDidChangeListenerHandle!
     var user: User?
    
     
@@ -25,6 +24,8 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.setNavigationBarHidden(true, animated: false)
+        
+        //TodoListUser.checkConnection(completion: handleConnection(status:))
         configureAuth()
     }
     
@@ -58,8 +59,19 @@ class LoginViewController: UIViewController {
     
     // MARK: - Login Session
     func loginSession() {
+        
         let authViewController = FUIAuth.defaultAuthUI()!.authViewController()
         self.present(authViewController, animated: true, completion: nil)
     }
+    
+    
+    func handleConnection(status: Bool){
+        
+        if(status == false){
+            
+            showFailureMessage(title: "Login Failed", message: "Please check your connection")
+        }
+    }
+    
     
 }

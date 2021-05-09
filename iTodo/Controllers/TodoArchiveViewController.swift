@@ -41,6 +41,7 @@ class TodoArchiveViewController: UIViewController {
         getProfilePic()
         getArchiveTaskList()
         
+        
     }
     
     // MARK: - Get Grouped Task List
