@@ -17,7 +17,7 @@ class TodoListUser {
         static var ref: DatabaseReference!
         static var _authHandle: AuthStateDidChangeListenerHandle!
         static var _refHandle: DatabaseHandle!
-        static var cconnectedRef: DatabaseReference!
+        static var connectedRef: DatabaseReference!
         
         static var user: User?
     }
@@ -114,7 +114,7 @@ class TodoListUser {
             } else {
                 completion(false)
             }
-        }
+        } 
         
         
         
@@ -122,9 +122,10 @@ class TodoListUser {
     
     class func checkConnection(completion: @escaping (Bool) -> Void){
         
-        TodoAuth.cconnectedRef = Database.database().reference(withPath: ".info/connected")
         
-        TodoAuth.cconnectedRef.observe(.value, with: { (connected) in
+        TodoAuth.connectedRef = Database.database().reference(withPath: ".info/connected")
+        
+        TodoAuth.connectedRef.observe(.value, with: { (connected) in
             if let boolean = connected.value as? Bool, boolean == true {
                 print("Firebase is connected")
                 completion(true)
@@ -144,7 +145,7 @@ class TodoListUser {
         let userId = TodoAuth.user?.uid
         
         TodoAuth._refHandle = TodoAuth.ref.child(TodoList.TodoListTable).queryOrdered(byChild: "userId").queryStarting(atValue: userId).queryEnding(atValue: userId).observe(.childAdded) { ( snapshot: DataSnapshot) in
-            
+           
             completion(snapshot)
         }
     }
@@ -204,7 +205,7 @@ class TodoListUser {
         
         Auth.auth().removeStateDidChangeListener(TodoAuth._authHandle)
         TodoAuth.ref.child("Tasks").removeObserver(withHandle: TodoAuth._refHandle)
-        TodoAuth.cconnectedRef.removeAllObservers()
+        TodoAuth.connectedRef.removeAllObservers()
     }
     
     
