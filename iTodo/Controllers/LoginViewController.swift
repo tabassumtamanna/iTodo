@@ -25,8 +25,8 @@ class LoginViewController: UIViewController {
         super.viewDidLoad()
         navigationController?.setNavigationBarHidden(true, animated: false)
         
-        TodoListUser.checkConnection(completion: handleConnection(connectionStatus:))
         configureAuth()
+        //TodoListUser.checkConnection(completion: handleConnection(connectionStatus:))
     }
     
 
@@ -66,10 +66,11 @@ class LoginViewController: UIViewController {
     }
     
     
-    func handleConnection(connectionStatus: Bool){
+    func handleConnection(connectionStatus: Bool?){
         
-        if !connectionStatus  {
-            self.showFailureMessage(title: "Login Failed", message: "Please check your connection")
+        if let connectionStatus = connectionStatus, connectionStatus == false {
+            print("connectionStatus: \(connectionStatus)")
+            self.showFailureMessage(title: "Network Failed", message: "Please check your connection")
         }
         
     }

@@ -9,6 +9,7 @@ pod 'Firebase/RemoteConfig'
 pod 'FirebaseUI'
 pod 'Firebase/Auth'
 pod 'MarqueeLabel'
+pod 'ReachabilitySwift'
 
 target 'iTodo' do 
 end

@@ -125,17 +125,16 @@ class TodoListUser {
         
         TodoAuth.connectedRef = Database.database().reference(withPath: ".info/connected")
         
-        TodoAuth.connectedRef.observe(.value, with: { (connected) in
-            if let boolean = connected.value as? Bool, boolean == true {
-                print("Firebase is connected")
-                completion(true)
-            } else {
-                print("Firebase is NOT connected")
-                completion(false)
-            }
+        TodoAuth.connectedRef.observe(.value, with: { snapshot in
+          if snapshot.value as? Bool ?? false {
+            print("Connected")
+            completion(true)
+          } else {
+            print("Not connected")
+            completion(false)
+          }
         })
     }
-    
     
     
     // MARK: - Get Task List
