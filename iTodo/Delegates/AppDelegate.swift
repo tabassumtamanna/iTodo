@@ -47,6 +47,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         } else {
             print("Not reachable")
             
+            let alertVC = UIAlertController(title: "Network Failed", message: "Please check your connection", preferredStyle: .alert)
+            alertVC.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            self.window?.rootViewController?.present(alertVC, animated: true, completion: nil)
+
         }
         
     }

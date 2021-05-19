@@ -8,14 +8,10 @@
 import UIKit
 import Firebase
 import FirebaseUI
-
+import Reachability
 
 // MARK: - LoginViewController
 class LoginViewController: UIViewController {
-
-    // MARK:-  Properties
-    var user: User?
-   
     
     // MARK: - Outlets
     @IBOutlet weak var signInButton: UIButton!
