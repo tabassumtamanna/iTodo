@@ -16,7 +16,7 @@ In iTodo app, users can manage their to-do list and see the archive list. Archiv
 
 ## App Workflow
 
-User has to login either using their google account. 
+User has to login using their google account. 
 
  <img src="/ScreenShots/login.png" width="200" />
 
