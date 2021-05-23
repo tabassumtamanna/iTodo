@@ -8,6 +8,7 @@ pod 'Firebase/Database'
 pod 'Firebase/RemoteConfig'
 pod 'FirebaseUI'
 pod 'Firebase/Auth'
+pod 'GoogleSignIn'
 pod 'MarqueeLabel'
 
 target 'iTodo' do 

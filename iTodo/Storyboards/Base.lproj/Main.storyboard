@@ -32,38 +32,43 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5hv-V1-Dx9">
-                                <rect key="frame" x="114" y="440" width="191" height="52"/>
-                                <color key="backgroundColor" red="0.067763365810000004" green="0.69789862629999999" blue="0.89414525030000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="52" id="7tD-Sp-Zhk"/>
-                                </constraints>
-                                <state key="normal" title="SIGN IN">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" image="iTodo" translatesAutoresizingMaskIntoConstraints="NO" id="Cfo-vM-BL3">
+                                <rect key="frame" x="89" y="168" width="236" height="243"/>
+                            </imageView>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="c6Q-uw-xj2">
+                                <rect key="frame" x="188" y="585" width="38" height="37"/>
+                                <color key="color" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </activityIndicatorView>
+                            <button opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="751" contentHorizontalAlignment="leading" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Puf-Om-Nou">
+                                <rect key="frame" x="92" y="472" width="230" height="48"/>
+                                <color key="backgroundColor" systemColor="linkColor"/>
+                                <state key="normal" title="Sign In with Google" image="btn_google_dark_normal_ios-2">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
-                                    <action selector="showLoginView:" destination="Fsr-34-qeW" eventType="touchUpInside" id="iAp-h7-VDo"/>
+                                    <action selector="signInButtonTapped:" destination="Fsr-34-qeW" eventType="touchUpInside" id="Yqb-2g-iIe"/>
                                 </connections>
                             </button>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iTodo" translatesAutoresizingMaskIntoConstraints="NO" id="Cfo-vM-BL3">
-                                <rect key="frame" x="89" y="168" width="236" height="222"/>
-                            </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="0Xs-Fv-gce"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="0Xs-Fv-gce" firstAttribute="trailing" secondItem="Cfo-vM-BL3" secondAttribute="trailing" constant="89" id="IoB-GZ-O9L"/>
-                            <constraint firstItem="Cfo-vM-BL3" firstAttribute="leading" secondItem="0Xs-Fv-gce" secondAttribute="leading" constant="89" id="PID-DG-X3S"/>
-                            <constraint firstItem="5hv-V1-Dx9" firstAttribute="top" secondItem="Cfo-vM-BL3" secondAttribute="bottom" constant="50" id="aSw-43-NDn"/>
-                            <constraint firstItem="5hv-V1-Dx9" firstAttribute="leading" secondItem="0Xs-Fv-gce" secondAttribute="leading" constant="114" id="lZP-Ol-4Cy"/>
-                            <constraint firstItem="0Xs-Fv-gce" firstAttribute="bottom" secondItem="5hv-V1-Dx9" secondAttribute="bottom" constant="370" id="r5f-jh-CWG"/>
-                            <constraint firstItem="Cfo-vM-BL3" firstAttribute="top" secondItem="0Xs-Fv-gce" secondAttribute="top" constant="80" id="xif-i5-0OT"/>
-                            <constraint firstItem="0Xs-Fv-gce" firstAttribute="trailing" secondItem="5hv-V1-Dx9" secondAttribute="trailing" constant="109" id="y8H-I5-7BT"/>
+                            <constraint firstItem="Cfo-vM-BL3" firstAttribute="top" secondItem="0Xs-Fv-gce" secondAttribute="top" constant="80" id="0cO-iL-QsO"/>
+                            <constraint firstItem="0Xs-Fv-gce" firstAttribute="bottom" secondItem="c6Q-uw-xj2" secondAttribute="bottom" constant="240" id="3tg-uK-Tuq"/>
+                            <constraint firstItem="c6Q-uw-xj2" firstAttribute="top" secondItem="Puf-Om-Nou" secondAttribute="bottom" constant="65" id="4cM-nC-B0a"/>
+                            <constraint firstItem="Puf-Om-Nou" firstAttribute="leading" secondItem="0Xs-Fv-gce" secondAttribute="leading" constant="92" id="e3X-GI-wda"/>
+                            <constraint firstItem="Cfo-vM-BL3" firstAttribute="leading" secondItem="0Xs-Fv-gce" secondAttribute="leading" constant="89" id="fhc-x8-oJL"/>
+                            <constraint firstItem="0Xs-Fv-gce" firstAttribute="trailing" secondItem="Puf-Om-Nou" secondAttribute="trailing" constant="92" id="g4e-fl-u1R"/>
+                            <constraint firstItem="Puf-Om-Nou" firstAttribute="top" secondItem="Cfo-vM-BL3" secondAttribute="bottom" constant="61" id="iol-VW-X7S"/>
+                            <constraint firstItem="c6Q-uw-xj2" firstAttribute="leading" secondItem="0Xs-Fv-gce" secondAttribute="leading" constant="188" id="lpE-xl-ZGq"/>
+                            <constraint firstItem="0Xs-Fv-gce" firstAttribute="trailing" secondItem="Cfo-vM-BL3" secondAttribute="trailing" constant="89" id="m9y-8K-OJe"/>
+                            <constraint firstItem="0Xs-Fv-gce" firstAttribute="trailing" secondItem="c6Q-uw-xj2" secondAttribute="trailing" constant="188" id="rUY-Sd-t9D"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="vah-Cl-Thf"/>
                     <connections>
-                        <outlet property="signInButton" destination="5hv-V1-Dx9" id="cyC-ul-Bb0"/>
+                        <outlet property="activityIndicator" destination="c6Q-uw-xj2" id="OR2-5s-vQp"/>
+                        <outlet property="signInButton" destination="Puf-Om-Nou" id="Zlk-tW-UAW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lFL-Lg-sPp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -142,10 +147,10 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="ffa-g4-WVJ" userLabel="Table Stack View">
-                                        <rect key="frame" x="0.0" y="65" width="394" height="602"/>
+                                        <rect key="frame" x="0.0" y="65" width="394" height="570"/>
                                         <subviews>
                                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Qhm-mA-sT1">
-                                                <rect key="frame" x="0.0" y="0.0" width="394" height="602"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="394" height="570"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <prototypes>
                                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="TaskListViewCell" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="TaskListViewCell" rowHeight="89" id="Jj6-gq-97M" customClass="TaskListViewCell" customModule="iTodo" customModuleProvider="target">
@@ -182,10 +187,10 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="aYa-k8-ind" userLabel="Label Stack View">
-                                        <rect key="frame" x="0.0" y="687" width="394" height="18"/>
+                                        <rect key="frame" x="0.0" y="655" width="394" height="50"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="clip" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cUu-nQ-HjN" userLabel="Jokes Label" customClass="MarqueeLabel" customModule="MarqueeLabel">
-                                                <rect key="frame" x="0.0" y="0.0" width="394" height="18"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="394" height="50"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -328,9 +333,13 @@
         <designable name="cUu-nQ-HjN"/>
     </designables>
     <resources>
+        <image name="btn_google_dark_normal_ios-2" width="48" height="48"/>
         <image name="iTodo" width="1280" height="1280"/>
         <image name="list.bullet.rectangle" catalog="system" width="128" height="93"/>
         <image name="logout" width="24" height="24"/>
+        <systemColor name="linkColor">
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

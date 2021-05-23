@@ -50,13 +50,18 @@ class TodoListUser {
     @discardableResult class func taskForGETRequest<ResponseType: Decodable>(url: URL, responseType: ResponseType.Type, completion: @escaping (ResponseType?, Error?) -> Void) -> URLSessionTask {
        
         let task = URLSession.shared.dataTask(with: url) { data, response, error in
+            
+            if let err = error{
+                print(err.localizedDescription)
+                completion(nil, err)
+                return
+            }
             guard let data = data else {
                 DispatchQueue.main.async {
                     completion(nil, error)
                 }
                 return
             }
-            
             
             let decoder = JSONDecoder()
             do {
@@ -79,14 +84,12 @@ class TodoListUser {
     // MARK: - Get Random Jokes
     class func getRandomJokes(completion: @escaping (String?, String?, Error?) -> Void){
         
-        print(Endpoints.getRandomJokes.url)
-        
         taskForGETRequest(url: Endpoints.getRandomJokes.url, responseType: OfficialJokesApiResponse.self) { (response, error) in
             
             if let response = response {
                 completion(response.setup, response.punchline, nil)
             } else {
-                completion("", "",  error)
+                completion(nil, nil,  error)
             }
         }
     }
@@ -96,10 +99,6 @@ class TodoListUser {
     
     // MARK: - login
     class func login(completion: @escaping (Bool) -> Void) {
-        
-        let provider: [FUIAuthProvider] = [FUIGoogleAuth(), FUIEmailAuth()]
-        FUIAuth.defaultAuthUI()?.providers = provider
-        
         
         // listen for changes in the authorization state
         TodoAuth._authHandle = Auth.auth().addStateDidChangeListener { (auth: Auth, user: User?) in
@@ -116,23 +115,6 @@ class TodoListUser {
             }
         }
         
-        
-        
-    }
-    
-    class func checkConnection(completion: @escaping (Bool) -> Void){
-        
-        TodoAuth.cconnectedRef = Database.database().reference(withPath: ".info/connected")
-        
-        TodoAuth.cconnectedRef.observe(.value, with: { (connected) in
-            if let boolean = connected.value as? Bool, boolean == true {
-                print("Firebase is connected")
-                completion(true)
-            } else {
-                print("Firebase is NOT connected")
-                completion(false)
-            }
-        })
     }
     
     

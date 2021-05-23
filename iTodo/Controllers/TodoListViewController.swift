@@ -22,6 +22,7 @@ class TodoListViewController: UIViewController {
     
     // MARK: - Properties
     var taskList: [DataSnapshot]! = []
+    let spinner = UIActivityIndicatorView(style: .gray)
    
     
     // MARK: - View Did Load
@@ -32,6 +33,9 @@ class TodoListViewController: UIViewController {
         self.taskTableView.dataSource = self
         self.taskTextField.delegate = self
         self.taskTextField.text = ""
+        
+        spinner.startAnimating()
+        taskTableView.backgroundView = spinner
         
         getProfilePic()
         getTodayTaskList()
@@ -55,6 +59,7 @@ class TodoListViewController: UIViewController {
     // MARK:- Handle Task List
     func handleTaskList(taskSnapshot: DataSnapshot){
        
+        spinner.stopAnimating()
         let yesterday = Calendar.current.date(byAdding: .day, value: -1, to: Date())!
         let endDate = getFormattedDate(date: yesterday, format: "yyyy-MM-dd HH:mm:ss")
         
