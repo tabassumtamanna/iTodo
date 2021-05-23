@@ -17,7 +17,6 @@ class TodoListUser {
         static var ref: DatabaseReference!
         static var _authHandle: AuthStateDidChangeListenerHandle!
         static var _refHandle: DatabaseHandle!
-        static var cconnectedRef: DatabaseReference!
         
         static var user: User?
     }
@@ -102,8 +101,6 @@ class TodoListUser {
         
         // listen for changes in the authorization state
         TodoAuth._authHandle = Auth.auth().addStateDidChangeListener { (auth: Auth, user: User?) in
-           
-            print(auth)
             // check if there is a current user
             if let activeUser = user {
                 
@@ -186,7 +183,6 @@ class TodoListUser {
         
         Auth.auth().removeStateDidChangeListener(TodoAuth._authHandle)
         TodoAuth.ref.child("Tasks").removeObserver(withHandle: TodoAuth._refHandle)
-        TodoAuth.cconnectedRef.removeAllObservers()
     }
     
     
