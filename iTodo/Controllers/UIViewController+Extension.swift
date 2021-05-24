@@ -7,6 +7,7 @@
 
 import UIKit
 import Firebase
+import GoogleSignIn
 
 // MARK: - Extension : UIViewController
 extension  UIViewController {
@@ -15,6 +16,10 @@ extension  UIViewController {
     // MARK: - signOutTapped
     @IBAction func signOutTapped(_ sender: Any) {
         
+        // Sign out from Google
+        GIDSignIn.sharedInstance()?.signOut()
+        
+        // Sign out from Firebase
         do {
             
             try Auth.auth().signOut()

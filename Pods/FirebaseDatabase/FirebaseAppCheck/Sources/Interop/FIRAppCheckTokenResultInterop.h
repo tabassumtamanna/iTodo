@@ -1,5 +1,5 @@
 /*
- * Copyright 2017 Google
+ * Copyright 2020 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,24 +16,17 @@
 
 #import <Foundation/Foundation.h>
 
-#import "FirebaseDatabase/Sources/Api/Private/FTypedefs_Private.h"
-#import "FirebaseDatabase/Sources/Utilities/FTypedefs.h"
+NS_ASSUME_NONNULL_BEGIN
 
-@protocol FIRAuthInterop;
+@protocol FIRAppCheckTokenResultInterop <NSObject>
 
-@protocol FAuthTokenProvider <NSObject>
+/// App Check token in the case of success or a dummy token in the case of a failure.
+/// In general, the value of the token should always be set to the request header.
+@property(nonatomic, readonly) NSString *token;
 
-- (void)fetchTokenForcingRefresh:(BOOL)forceRefresh
-                    withCallback:(fbt_void_nsstring_nserror)callback;
-
-- (void)listenForTokenChanges:(fbt_void_nsstring)listener;
-
-@end
-
-@interface FAuthTokenProvider : NSObject
-
-+ (id<FAuthTokenProvider>)authTokenProviderWithAuth:(id<FIRAuthInterop>)auth;
-
-- (instancetype)init NS_UNAVAILABLE;
+/// A token fetch error in the case of a failure or `nil` in the case of success.
+@property(nonatomic, readonly, nullable) NSError *error;
 
 @end
+
+NS_ASSUME_NONNULL_END
