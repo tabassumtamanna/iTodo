@@ -28,7 +28,7 @@ Also in the dashboard user will have the option to add a task using a input box 
 
 After adding a task it will appear as a list in the dashboard followed by a checkbox. Checkbox allow user to check/uncheck a task.
 
-<img src="/ScreenShots/dashboard.png" width="200" /> <img src="/ScreenShots/dashboard-with-completed-task.png" width="200" />
+<img src="/ScreenShots/dashboard.png" width="200" /> <img src="/ScreenShots/dashboard-with-completed-task.png" width="180" />
 
 At the bottom of the dashboard there are two tabs: one is for the dashboard and another is the Archived List.
 
