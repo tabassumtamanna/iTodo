@@ -40,6 +40,12 @@ In both list completed task are shown as grey and non completed task shown as bl
 
 User can remove any task from dashboard using swipe feature.
 
+### Jokes API
+
+Added marquee effect on the deshboard using jokes api where a random jokes will appear every time user open the deshboard.
+
+Documentation: [The Offcial Joke API](https://github.com/15Dkatz/official_joke_api)
+
 ## Tools
 
 - Xcode 12.1
