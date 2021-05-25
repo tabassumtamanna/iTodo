@@ -30,9 +30,9 @@ class LoginViewController: UIViewController, GIDSignInDelegate {
     
     // MARK: - Sign In Button Tapped
     @IBAction func signInButtonTapped(_ sender: UIButton) {
-        self.signInButton.isEnabled = false
-        self.activityIndicator.isHidden = false
-        self.activityIndicator.startAnimating()
+        signInButton.isEnabled = false
+        activityIndicator.isHidden = false
+        activityIndicator.startAnimating()
         
         GIDSignIn.sharedInstance().signIn()
         
@@ -59,8 +59,8 @@ class LoginViewController: UIViewController, GIDSignInDelegate {
         if let error = error {
             print("ERROR: \(error.localizedDescription)")
             
-            self.activityIndicator.stopAnimating()
-            self.signInButton.isEnabled = true
+            activityIndicator.stopAnimating()
+            signInButton.isEnabled = true
             
             showFailureMessage(title: "Sign In Error", message: error.localizedDescription)
             return
@@ -90,7 +90,7 @@ class LoginViewController: UIViewController, GIDSignInDelegate {
     func sign(_ signIn: GIDSignIn!, didDisconnectWith user: GIDGoogleUser!, withError error: Error!) {
         if let error = error {
             print(error.localizedDescription)
-            self.showFailureMessage(title: "Sign In Error", message: error.localizedDescription)
+            showFailureMessage(title: "Sign In Error", message: error.localizedDescription)
         }
     }
     

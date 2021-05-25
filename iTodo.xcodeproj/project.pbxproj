@@ -22,6 +22,7 @@
 		E9A8DD7025F9C89600B1A2ED /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E9A8DD6F25F9C89600B1A2ED /* Assets.xcassets */; };
 		E9A8DD7325F9C89600B1A2ED /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E9A8DD7125F9C89600B1A2ED /* LaunchScreen.storyboard */; };
 		E9ABF694264529C3008C93C8 /* OfficialJokesApiResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9ABF693264529C3008C93C8 /* OfficialJokesApiResponse.swift */; };
+		E9ABF905265C7CC5008C93C8 /*  OfficialJokesApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9ABF904265C7CC5008C93C8 /*  OfficialJokesApi.swift */; };
 		E9F796202606FD3100955DE8 /* TaskListViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F7961F2606FD3100955DE8 /* TaskListViewCell.swift */; };
 /* End PBXBuildFile section */
 
@@ -45,6 +46,7 @@
 		E9A8DD7225F9C89600B1A2ED /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E9A8DD7425F9C89600B1A2ED /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = iTodo/Resources/Info.plist; sourceTree = SOURCE_ROOT; };
 		E9ABF693264529C3008C93C8 /* OfficialJokesApiResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfficialJokesApiResponse.swift; sourceTree = "<group>"; };
+		E9ABF904265C7CC5008C93C8 /*  OfficialJokesApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = " OfficialJokesApi.swift"; sourceTree = "<group>"; };
 		E9F7961F2606FD3100955DE8 /* TaskListViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -129,6 +131,7 @@
 				E99F7DF9262C2D2400B0FE1E /* TodoList.swift */,
 				E99F7EBE263671F700B0FE1E /* Task.swift */,
 				E964F5BC263FB4C300313D18 /* TodoList User */,
+				E9ABF903265C7CA4008C93C8 /*  Official Jokes Api */,
 				E964F5BB263FB4AD00313D18 /* Responses */,
 			);
 			path = Models;
@@ -163,6 +166,14 @@
 				E9A8DD7125F9C89600B1A2ED /* LaunchScreen.storyboard */,
 			);
 			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		E9ABF903265C7CA4008C93C8 /*  Official Jokes Api */ = {
+			isa = PBXGroup;
+			children = (
+				E9ABF904265C7CC5008C93C8 /*  OfficialJokesApi.swift */,
+			);
+			path = " Official Jokes Api";
 			sourceTree = "<group>";
 		};
 		E9F7961C25F9D7D200955DE8 /* Delegates */ = {
@@ -314,6 +325,7 @@
 				E9F796202606FD3100955DE8 /* TaskListViewCell.swift in Sources */,
 				E99F7E26262C3BC000B0FE1E /* TodoArchiveViewController.swift in Sources */,
 				E9A8DD6725F9C89500B1A2ED /* AppDelegate.swift in Sources */,
+				E9ABF905265C7CC5008C93C8 /*  OfficialJokesApi.swift in Sources */,
 				E99F7EC22637616E00B0FE1E /* TodoListUser.swift in Sources */,
 				E99F7DFA262C2D2400B0FE1E /* TodoList.swift in Sources */,
 				E99F7EBF263671F700B0FE1E /* Task.swift in Sources */,

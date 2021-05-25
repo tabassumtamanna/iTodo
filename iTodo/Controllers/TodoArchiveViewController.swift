@@ -35,8 +35,8 @@ class TodoArchiveViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.taskArchiveTableView.delegate = self
-        self.taskArchiveTableView.dataSource = self
+        taskArchiveTableView.delegate = self
+        taskArchiveTableView.dataSource = self
        
         getProfilePic()
         getArchiveTaskList()
@@ -55,13 +55,13 @@ class TodoArchiveViewController: UIViewController {
         let taskCompleted = taskFire[TodoList.taskCompleted] ?? ""
         let userId = taskFire[TodoList.userId] ?? ""
         
-        self.taskList.append(Task(taskTitle: taskTitle, status: status, taskCreated: taskCreated, taskCompleted: taskCompleted, userId: userId))
+        taskList.append(Task(taskTitle: taskTitle, status: status, taskCreated: taskCreated, taskCompleted: taskCompleted, userId: userId))
            
         
-        self.sections = GroupedSection.group(rows: self.taskList, by: {getTaskSectionName($0.taskCreated)})
-        self.sections.sort { (lhs, rhs) in lhs.sectionItem > rhs.sectionItem}
+        sections = GroupedSection.group(rows: taskList, by: {getTaskSectionName($0.taskCreated)})
+        sections.sort { (lhs, rhs) in lhs.sectionItem > rhs.sectionItem}
         
-        self.taskArchiveTableView.reloadData()
+        taskArchiveTableView.reloadData()
         
     }
     
@@ -80,8 +80,7 @@ class TodoArchiveViewController: UIViewController {
         let task = taskSnapshot.value as! [String: String]
         
         if let taskCreated = task[TodoList.taskCreated], taskCreated < endDate {
-    
-            self.getGroupedTaskList(taskSnapshot)
+            getGroupedTaskList(taskSnapshot)
         }
     }
     
@@ -106,12 +105,12 @@ extension TodoArchiveViewController:  UITableViewDataSource, UITableViewDelegate
     // MARK: - Number Of Sections
    func numberOfSections(in tableView: UITableView) -> Int {
         
-        return self.sections.count
+        return sections.count
     }
     
     //MARK: - Title For Header In Section
    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-       let section = self.sections[section]
+       let section = sections[section]
        let date = section.sectionItem
        
        let formatingDate = getFormattedDate(date: date, format: "MMM dd, yyyy")
@@ -121,7 +120,7 @@ extension TodoArchiveViewController:  UITableViewDataSource, UITableViewDelegate
     
     // MARK: - Number Of Rows In Section
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let section = self.sections[section]
+        let section = sections[section]
         
         return  section.rowItem.count
     }
@@ -132,7 +131,7 @@ extension TodoArchiveViewController:  UITableViewDataSource, UITableViewDelegate
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "TaskArchiveViewCell", for: indexPath)
        
-        let section = self.sections[indexPath.section]
+        let section = sections[indexPath.section]
         let task = section.rowItem[indexPath.row]
         
         cell.textLabel?.text = task.taskTitle

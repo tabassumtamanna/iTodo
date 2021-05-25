@@ -29,10 +29,10 @@ class TodoListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.taskTableView.delegate = self
-        self.taskTableView.dataSource = self
-        self.taskTextField.delegate = self
-        self.taskTextField.text = ""
+        taskTableView.delegate = self
+        taskTableView.dataSource = self
+        taskTextField.delegate = self
+        taskTextField.text = ""
         
         spinner.startAnimating()
         taskTableView.backgroundView = spinner
@@ -47,7 +47,7 @@ class TodoListViewController: UIViewController {
     // MARK: - Actions Add Task Tapped
     @IBAction func addTaskTapped(_ sender: Any) {
         let _ = textFieldShouldReturn(taskTextField)
-        self.taskTextField.text = ""
+        taskTextField.text = ""
     }
     
     
@@ -67,8 +67,8 @@ class TodoListViewController: UIViewController {
         
         if let taskCreated = task[TodoList.taskCreated], taskCreated >= endDate {
     
-            self.taskList.append(taskSnapshot)
-            self.taskTableView.insertRows(at: [IndexPath(row: self.taskList.count - 1, section: 0)], with: .automatic)
+            taskList.append(taskSnapshot)
+            taskTableView.insertRows(at: [IndexPath(row: taskList.count - 1, section: 0)], with: .automatic)
         }
     }
   
@@ -116,7 +116,7 @@ class TodoListViewController: UIViewController {
         
         if let error = error {
             print("Task could not be \(handleType): \(error).")
-            self.showFailureMessage(title: "Task Not \(handleType)", message: "\(error.localizedDescription)")
+            showFailureMessage(title: "Task Not \(handleType)", message: "\(error.localizedDescription)")
         } else {
             print("Task \(handleType) successfully!")
         }
@@ -125,20 +125,14 @@ class TodoListViewController: UIViewController {
     // MARK:- Get Random Jokes
     func getRandomJokes(){
         
-        TodoListUser.getRandomJokes(completion: handleRandomJokes(setup:punchline:error:))
+        OfficialJokesApi.getRandomJokes(completion: handleRandomJokes(setup:punchline:error:))
     }
     
     // MARK:- Handle Random Jokes
     func handleRandomJokes(setup: String?, punchline: String?, error: Error?){
-        
-       
         if let setup = setup, let  punchline = punchline {
-            print(setup)
-            print(punchline)
-            
-            
-            self.jokesLabel.text = setup + " "  + punchline
-            self.jokesLabel.textColor = .systemBlue
+            jokesLabel.text = setup + " "  + punchline
+            jokesLabel.textColor = .systemBlue
         }
             
     }
@@ -206,7 +200,7 @@ extension TodoListViewController:  UITableViewDataSource, UITableViewDelegate {
         if(editingStyle == .delete){
             
             deleteTask(at: indexPath)
-            self.taskList.remove(at: indexPath.row)
+            taskList.remove(at: indexPath.row)
             tableView.reloadData()
             
         }
