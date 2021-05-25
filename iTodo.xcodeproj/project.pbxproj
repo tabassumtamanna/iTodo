@@ -128,8 +128,7 @@
 		E9A8DD8225F9D0C000B1A2ED /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				E99F7DF9262C2D2400B0FE1E /* TodoList.swift */,
-				E99F7EBE263671F700B0FE1E /* Task.swift */,
+				E9ABF90C265C804B008C93C8 /* TodoList */,
 				E964F5BC263FB4C300313D18 /* TodoList User */,
 				E9ABF903265C7CA4008C93C8 /*  Official Jokes Api */,
 				E964F5BB263FB4AD00313D18 /* Responses */,
@@ -174,6 +173,15 @@
 				E9ABF904265C7CC5008C93C8 /*  OfficialJokesApi.swift */,
 			);
 			path = " Official Jokes Api";
+			sourceTree = "<group>";
+		};
+		E9ABF90C265C804B008C93C8 /* TodoList */ = {
+			isa = PBXGroup;
+			children = (
+				E99F7DF9262C2D2400B0FE1E /* TodoList.swift */,
+				E99F7EBE263671F700B0FE1E /* Task.swift */,
+			);
+			path = TodoList;
 			sourceTree = "<group>";
 		};
 		E9F7961C25F9D7D200955DE8 /* Delegates */ = {

@@ -7,8 +7,6 @@
 
 import Foundation
 import Firebase
-import FirebaseUI
-import GoogleSignIn
 
 // MARK: - TodoListUser
 class TodoListUser {
@@ -23,7 +21,6 @@ class TodoListUser {
     
     enum TodoList {
         static let TodoListTable = "TodoList"
-        static let usersTable = "Users"
         
     }
 
@@ -45,7 +42,6 @@ class TodoListUser {
         }
         
     }
-    
     
     
     // MARK: - Get Task List
@@ -116,8 +112,4 @@ class TodoListUser {
         Auth.auth().removeStateDidChangeListener(TodoAuth._authHandle)
         TodoAuth.ref.child("Tasks").removeObserver(withHandle: TodoAuth._refHandle)
     }
-    
-    
-    
-    
 }

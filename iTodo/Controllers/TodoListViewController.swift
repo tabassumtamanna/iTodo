@@ -22,7 +22,7 @@ class TodoListViewController: UIViewController {
     
     // MARK: - Properties
     var taskList: [DataSnapshot]! = []
-    let spinner = UIActivityIndicatorView(style: .gray)
+    private let spinner = UIActivityIndicatorView(style: .gray)
    
     
     // MARK: - View Did Load
